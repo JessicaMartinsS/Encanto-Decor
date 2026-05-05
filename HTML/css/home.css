@@ -1,0 +1,132 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 1000px;
+    height: 500px; /* Altura suficiente para o scale(1.2) */
+    margin: 20px auto;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.mySlides {
+    position: absolute;
+    width: 300px; /* Largura de cada card */
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Slide Ativo (Centro) */
+.mySlides.active {
+    opacity: 1;
+    transform: scale(1.2);
+    z-index: 3;
+    pointer-events: auto;
+}
+
+/* Slide Anterior (Esquerda) */
+.mySlides.prev-card {
+    opacity: 0.6;
+    transform: translateX(-250px) scale(0.8);
+    z-index: 1;
+}
+
+/* Próximo Slide (Direita) */
+.mySlides.next-card {
+    opacity: 0.6;
+    transform: translateX(250px) scale(0.8);
+    z-index: 1;
+}
+
+.caption-text {
+    background: rgba(216, 27, 96, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Botões */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    padding: 16px;
+    color: var(--rosa-vibrante);
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: none;
+}
+.prev { left: 10px; 
+}
+.next { right: 10px; 
+}
+
+.caption-text {
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* Centraliza o bloco na horizontal */
+    width: fit-content; /* Faz o fundo abraçar o texto */
+    background-color: rgba(216, 27, 96, 0.7);
+    border-radius: 8px;
+}
+
+.next { right: 0; border-radius: 3px 0 0 3px; }
+.prev:hover, .next:hover { background-color: var(--rosa-vibrante); }
+
+.ver-mais-container {
+    text-align: center;
+    margin-top: 30px; /* Espaço entre o carrossel e o botão */
+    margin-bottom: 40px;
+}
+
+.btn-ver-fotos {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--rosa-vibrante);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 50px; /* Botão arredondado para um visual mais amigável */
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-ver-fotos:hover {
+    background-color: #db2777; /* Um tom de rosa um pouco mais escuro */
+    transform: translateY(-3px); /* Ele sobe levemente */
+    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.5);
+}
+
+/* Botões de Chamada */
+.cta-button, .cta-button-dream {
+    background-color: var(--rosa-vibrante);
+    color: var(--branco);
+    padding: 15px 40px;
+    border-radius: var(--radius-padrao);
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transicao);
+}
+

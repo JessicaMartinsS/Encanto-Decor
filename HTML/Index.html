@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jess & Ster | Encanto Decor</title>
+    <!-- O Global sempre vem primeiro -->
+    <link rel="stylesheet" href="./css/global.css">
+    <!-- O específico da página vem depois -->
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/catalogo.css">
+    <link rel="stylesheet" href="./css/finalizar.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <video autoplay loop muted playsinline>
+            <source src="img/logo.video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="header-phrase">
+        <h1>Transformamos Sonhos em Realidade</h1>
+    </div>
+
+    <!-- No index.html -->
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="foto.html">Galeria</a>
+        <a href="cadastro.html">Catálogo</a> <!-- Antes era catalogo.html -->
+        <a href="finalizar.html">Meus Pedidos</a>
+    </nav>
+</header>
+
+<main>
+    <section class="intro">
+        <h1>Bem-vindos à Jess & Ster</h1>
+        <p>Especialistas em decorações personalizadas que encantam corações.</p>
+    </section>
+<!--Carrosel adicionar as fotos-->>
+<section class="carousel-section">
+    <div class="carousel-container">
+
+        <div class="mySlides">
+            <img src="./img/1.png" alt="Festa Staitch">
+            <div class="caption-text">Stitch</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/13.png" alt="Festa 365 Sorrisos">
+            <div class="caption-text">365 Sorrisos</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/2.png" alt="Festa Bolofofo">
+            <div class="caption-text">Bolofofo</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/16.png" alt="Festa Heineken">
+            <div class="caption-text">Heineken</div>
+        </div>        
+
+        <div class="mySlides">
+            <img src="./img/5.png" alt="Festa Homem-Aranha">
+            <div class="caption-text">Homem Aranha</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/12.png" alt="Festa Março Lilas">
+            <div class="caption-text">Março Lilas</div>
+        </div>    
+
+        <div class="mySlides">
+            <img src="./img/7.png" alt="Festa Corinthians">
+            <div class="caption-text">Corinthian</div>
+        </div>    
+
+        <div class="mySlides">
+            <img src="./img/6.png" alt="Festa Princesa Diana">
+            <div class="caption-text">Princesa Diana</div>
+        </div>  
+
+        <div class="mySlides">
+            <img src="./img/3.png" alt="Minecraft">
+            <div class="caption-text">Minecraft</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/4.png" alt="Festa Princesas">
+            <div class="caption-text">Princesas</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./img/8.png" alt="Festa Bob Esponja">
+            <div class="caption-text">Bob Esponja</div>
+        </div>   
+
+        <div class="mySlides">
+            <img src="./img/9.png" alt="Festa Jardim Encantado">
+            <div class="caption-text">Jardim Encantando</div>
+        </div>           
+        
+        <!-- Botões de navegação -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <!-- Link para a nova página de fotos -->
+    <div class="ver-mais-container">
+        <a href="foto.html" class="btn-ver-fotos">Ver todas as fotos ✨</a>
+    </div>
+</section>
+
+    <!-- Chamada emocional para o catálogo -->
+    <section class="dream-invite">
+        <div class="butterfly-icon">🦋</div>
+        <h2>Vamos agora iniciar a realização do seu sonho?</h2>
+        <p>Escolha cada detalhe da sua festa e deixe a Jess & Ster cuidar do encanto.</p>
+        <a href="cadastro.html" class="cta-button-dream">Abrir Catálogo de Itens</a>
+    </section>
+</main>
+
+<!-- Script carregado ao final para garantir que o DOM exista -->
+<script src="js/script.js"></script>
+
+<footer class="footer-site">
+    <div class="footer-container">
+        <!-- Redes Sociais -->
+        <div class="footer-social">
+            <h3>Fale Conosco</h3>
+            <div class="social-links">
+                <a href="https://wa.me/message/YNWD5K2OA542N1" target="_blank" class="social-icon">WhatsApp Jess</a>
+                <a href="https://www.instagram.com/js.encanto.decor?igsh=Y2pxZGF6cjh1Nm13" target="_blank" class="social-icon">Instagram</a>
+            </div>
+        </div>
+
+        <!-- Créditos e Localização -->
+        <div class="footer-info">
+            <p>&copy; 2026 Jess & Ster Encanto Decor. Todos os direitos reservados.</p>
+            <p>Itaquaquecetuba - SP</p>
+            <p class="developer-credit">Desenvolvido por <strong>Jessica Martins</strong></p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

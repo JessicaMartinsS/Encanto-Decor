@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jess & Ster | Encanto Decor</title>
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <video autoplay loop muted playsinline>
+            <source src="img/logo.video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="header-phrase">
+        <h1>Transformamos Sonhos em Realidade</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="foto.html">Galeria</a>
+        <a href="cadastro.html">Catálogo</a>
+        <a href="finalizar.html">Meus Pedidos</a>
+    </nav>
+</header>
+
+<main class="cadastro-section">
+    <div class="cadastro-container">
+        <h2>Quase lá! ✨</h2>
+        <p>Preencha seus dados para visualizar nosso catálogo completo com temas e valores exclusivos para sua festa.</p>
+
+<!-- Formulário unificado com a estrutura correta para o CSS -->
+<div class="form-cadastro">
+    <div class="input-group">
+        <label>🎈 Nome Completo</label>
+        <input type="text" id="input-nome" placeholder="Como podemos te chamar?" required>
+    </div>
+
+    <div class="input-group">
+        <label>📧 E-mail</label>
+        <input type="email" id="input-email" placeholder="exemplo@email.com">
+    </div>
+
+    <div class="input-group">
+        <label>📞 WhatsApp</label>
+        <input type="tel" id="input-telefone" placeholder="(11) 99999-9999">
+    </div>
+
+    <button type="button" onclick="salvarCadastroInicial()" class="btn-acessar">
+        Liberar Catálogo ➔
+    </button>
+</div>
+</main>
+
+<footer>
+    <p>&copy; 2026 Jess & Ster Encanto Decor - Itaquaquecetuba, SP</p>
+    <p class="dev-credit">Desenvolvido por Jessica Silva</p>
+</footer>
+
+<!-- Script de Ponte entre Páginas -->
+<script>
+    function salvarCadastroInicial() {
+        // 1. Captura os dados dos inputs
+        const nome = document.getElementById('input-nome').value;
+        const email = document.getElementById('input-email').value;
+        const telefone = document.getElementById('input-telefone').value;
+
+        // 2. Validação obrigatória
+        if (nome.trim() === "") {
+            alert("Por favor, preencha seu nome para continuar! ✨");
+            return;
+        }
+
+        // 3. Salva no LocalStorage para o 'finalizar.js' ler depois
+        localStorage.setItem('nome_cliente', nome);
+        localStorage.setItem('email_cliente', email);
+        localStorage.setItem('telefone_cliente', telefone);
+
+        // 4. Mensagem de boas-vindas e redirecionamento
+        alert(`Seja bem-vinda, ${nome}! Vamos ver nossos kits?`);
+        window.location.href = "catalogo.html";
+    }
+</script>
+
+<!-- O script.js deve vir por último se houver outras lógicas globais -->
+<script src="js/script.js"></script>
+</body>
+</html>

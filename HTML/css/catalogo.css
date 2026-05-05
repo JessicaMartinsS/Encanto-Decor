@@ -1,0 +1,482 @@
+
+
+
+/* ============================================================
+   1. BOX DE INTERESSE (TEMA DA FESTA)
+   ============================================================ */
+.tema-interesse-box {
+    padding: 40px 20px;
+    background: linear-gradient(to right, var(--rosa-suave), #ffffff);
+    border-radius: 30px;
+    margin: 20px auto 40px;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: var(--sombra-leve);
+}
+
+.tema-container label {
+    display: block;
+    color: var(--roxo-escuro);
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.input-wrapper {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.tema-container input {
+    width: 100%;
+    padding: 18px 25px;
+    border: 3px solid var(--rosa-suave);
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: var(--transicao);
+    font-family: var(--fonte-principal);
+}
+
+.tema-container input:focus {
+    border-color: var(--rosa-vibrante);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
+}
+
+.icon-magic {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+}
+
+.ajuda-tema {
+    font-size: 0.85rem;
+    color: var(--cinza-texto);
+    margin-top: 10px;
+}
+
+/* ============================================================
+   1. VARIÁVEIS E CONFIGURAÇÕES GERAIS
+   ============================================================ */
+:root {
+    --rosa-suave: #ffe4e1;
+    --rosa-vibrante: #d81b60;
+    --rosa-hover: #c2185b;
+    --roxo-escuro: #4a148c;
+    --cinza-texto: #555;
+    --branco: #ffffff;
+    --sombra-leve: 0 4px 12px rgba(0,0,0,0.1);
+    --fonte-principal: 'Poppins', sans-serif;
+    --transicao: all 0.3s ease;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: var(--cinza-texto);
+}
+
+/* ============================================================
+   2. GALERIA DE FOTOS (PORTFÓLIO)
+   ============================================================ */
+.galeria-fotos {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.galeria-fotos h2 {
+    margin-bottom: 40px;
+    color: var(--rosa-vibrante);
+    font-size: 2rem;
+}
+
+.grid-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.foto-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--sombra-leve);
+    height: 300px; /* Altura fixa para alinhar todas as fotos */
+    border: 2px solid var(--rosa-suave);
+    transition: var(--transicao);
+}
+
+.foto-item:hover {
+    transform: scale(1.03);
+}
+
+.foto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o espaço sem distorcer personagens */
+    display: block;
+}
+
+/* ============================================================
+   3. CATÁLOGO DE PRODUTOS (CARDS)
+   ============================================================ */
+.titulo-secao {
+    text-align: center;
+    color: var(--rosa-hover);
+    font-size: 1.8rem;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rosa-suave);
+}
+
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* O SEGREDO PARA AS IMAGENS APARECEREM 100% E MENORES */
+.card-item img, 
+.imagem-card,
+.container-foto img {
+    width: 100%;
+    height: 180px;      /* Diminuímos de 250px para 180px */
+    object-fit: contain; /* Garante que 100% da foto apareça sem cortes */
+    background-color: #f9f9f9; /* Fundo neutro caso a foto não preencha todo o espaço */
+    display: block;
+    padding: 10px;      /* Pequeno respiro para a foto não colar na borda */
+}
+
+.card-item:hover {
+    transform: translateY(-10px);
+}
+
+
+
+/* Informações e Listas */
+.card-info, .conteudo-card {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.lista-itens-kit {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza a lista horizontalmente */
+}
+
+.lista-itens-kit li {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.preco {
+    font-weight: bold;
+    color: var(--rosa-vibrante);
+    font-size: 1.3rem;
+    margin: 10px 0;
+    display: block;
+}
+
+/* ============================================================
+   4. BOTÕES E CONTROLES (CENTRALIZADOS)
+   ============================================================ */
+.controles-qtd, .controles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+button {
+    background-color: var(--rosa-vibrante);
+    color: var(--branco);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Bolinha perfeita */
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 0;
+    transition: var(--transicao);
+}
+
+button:hover {
+    background-color: var(--rosa-hover);
+}
+
+.qtd-display, span[id^="qtd-"] {
+    font-weight: bold;
+    min-width: 25px;
+    text-align: center;
+}
+
+/* Container do Carrinho Flutuante */
+.carrinho-flutuante {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--rosa-vibrante); /* Cor da sua marca */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Garante que fique acima de tudo */
+    border-radius: 20px 20px 0 0;
+    font-family: var(--fonte-principal);
+    
+    /* Esconde o carrinho se o valor for zero (opcional) */
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+/* --- WIDGET TOTAL FLUTUANTE --- */
+.total-flutuante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--roxo-escuro); /* Cor base da marca */
+    color: var(--branco);
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 2px solid var(--rosa-vibrante);
+    transition: var(--transicao);
+}
+
+.info-total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    padding-right: 15px;
+}
+
+.acoes-flutuantes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- ESTILO DA LIXEIRA --- */
+.btn-lixeira {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 5px;
+}
+
+.btn-lixeira:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 5px #ff4d4d);
+}
+
+/* --- WIDGET TOTAL FLUTUANTE ADAPTÁVEL --- */
+.total-flutuante {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: var(--roxo-escuro);
+    color: var(--branco);
+    
+    /* AJUSTE CHAVE: Ocupa apenas o espaço dos itens internos */
+    width: fit-content; 
+    max-width: 90vw; /* Garante que não ultrapasse a tela em celulares */
+    white-space: nowrap; /* Evita que o texto quebre em duas linhas */
+    
+    padding: 6px 16px; 
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 1.5px solid var(--rosa-vibrante);
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Mantém a centralização ao aparecer */
+.total-flutuante.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.info-total {
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    padding-right: 12px;
+}
+
+/* Ajuste do botão para acompanhar o tamanho reduzido */
+.btn-ver-pedido {
+    background-color: var(--rosa-vibrante);
+    color: white;
+    text-decoration: none;
+    padding: 5px 12px; 
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: var(--transicao);
+}
+
+/* --- BOTÃO VER PEDIDO ATUALIZADO --- */
+.btn-ver-pedido {
+    background-color: var(--rosa-vibrante);
+    color: white;
+    text-decoration: none;
+    /* Botão mais alto para facilitar o clique */
+    padding: 6px 14px; 
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transicao);
+    border: 1px solid transparent;
+}
+
+.btn-ver-pedido:hover {
+    background-color: transparent;
+    border-color: var(--rosa-vibrante);
+    color: var(--rosa-vibrante);
+    transform: translateY(-2px);
+}
+
+/* Quando o JS ativa a barra */
+.carrinho-resumo.ativo {
+    bottom: 0; /* Ela sobe para a tela */
+}
+
+.info-total {
+    font-size: 1.2rem;
+}
+
+#valor-total-flutuante {
+    font-weight: 800;
+}
+
+.btn-finalizar-flutuante {
+    background-color: white;
+    color: var(--rosa-vibrante);
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: var(--sombra-leve);
+}
+
+.btn-finalizar-flutuante:hover {
+    background-color: var(--rosa-suave);
+    transform: scale(1.05);
+}
+
+.campo-detalhe {
+    margin-bottom: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+.campo-detalhe label {
+    display: block;
+    font-weight: bold;
+    color: var(--roxo-escuro);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.input-estilizado {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-estilizado:focus {
+    border-color: var(--rosa-vibrante);
+}
+
+/* Container de Detalhes para alinhar com os cards de produtos */
+.detalhes-evento-container {
+    width: 100%;
+    max-width: 500px; /* Mantém um tamanho elegante no centro */
+    margin: 20px auto; 
+    padding: 25px;
+}
+
+.campo-detalhe {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left; /* Texto da label alinhado à esquerda para leitura */
+}
+
+.campo-detalhe label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--roxo-escuro); /* Cor da sua marca */
+    margin-bottom: 5px;
+}
+
+/* Estilização dos Inputs e Textarea */
+.input-estilizado {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transicao);
+    background-color: #f9f9f9;
+}
+
+.input-estilizado:focus {
+    border-color: var(--rosa-vibrante); /* Destaque ao clicar */
+    background-color: var(--branco);
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 20, 147, 0.2);
+}
+
+textarea.input-estilizado {
+    resize: none;
+    min-height: 80px;
+}

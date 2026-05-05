@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Jess & Ster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/finalizar.css">
+</head>
+<body>
+
+<main>
+    <!-- Resumo dos Itens -->
+    <div id="lista-carrinho-final" class="card-resumo">
+        <h3 style="margin-bottom: 15px; color: var(--roxo-escuro);">📋 Resumo do Pedido</h3>
+        <!-- O JavaScript vai injetar TUDO aqui dentro -->
+        <div id="produtos-check-list"></div>
+    </div>
+
+    <!-- Cadastro do Cliente -->
+    <section class="card-resumo">   
+        <h3>Seu Cadastro 🦋</h3>
+        <div id="dados-cadastro-cliente">
+            <div class="info-linha"><strong>Nome:</strong> <span id="exibir-nome-cliente">---</span></div>
+            <div class="info-linha"><strong>E-mail:</strong> <span id="exibir-email-cliente">---</span></div>
+            <div class="info-linha"><strong>Telefone:</strong> <span id="exibir-telefone-cliente">---</span></div>
+            <div class="info-linha"><strong>Tema:</strong> <span id="exibir-tema-festa">---</span></div>
+        </div>
+    </section>
+
+    <!-- Detalhes do Evento -->
+    <section class="card-resumo agendamento-premium" id="agendamento-jess-ster">
+        <div class="agendamento-header">
+            <h3>📅 Detalhes do Evento</h3>
+            <p>Escolha o momento perfeito para sua celebração</p>
+        </div>
+        <div class="campos-agendamento-flex">
+            <div class="campo-detalhe">
+                <label for="data-evento">Data da Festa</label>
+                <input type="date" id="data-evento" class="input-estilizado">
+            </div>
+            <div class="campo-detalhe">
+                <label for="horario-evento">Horário de Início</label>
+                <input type="time" id="horario-evento" class="input-estilizado">
+            </div>
+        </div>
+        <div class="campo-detalhe full-width">
+            <label for="obs-evento">Observações ✨</label>
+            <textarea id="obs-evento" class="input-estilizado" rows="3" placeholder="Cores, referências..."></textarea>
+        </div>
+    </section>
+        
+    <!-- Local de Entrega -->
+    <section class="card-resumo agendamento-premium">
+        <div class="agendamento-header">
+            <h3>Local de Entrega 🚚</h3>
+        </div>
+        <div class="sessao-cep">
+            <div class="input-group">
+                <label for="cep-cliente">CEP do Evento</label>
+                <input type="text" id="cep-cliente" placeholder="00000-000" maxlength="9" onblur="buscarCEP()" class="input-estilizado" required>
+            </div>
+        </div>
+
+        <div id="sessao-endereco-completa" style="display:none; margin-top: 20px;">
+            <div class="input-group">
+                <label>Rua:</label>
+                <input type="text" id="rua-cliente" class="input-estilizado" readonly>
+            </div>
+            <div class="input-group">
+                <label>Bairro:</label>
+                <input type="text" id="bairro-cliente" class="input-estilizado" readonly>
+            </div>
+            <div class="campos-agendamento-flex">
+                <div class="input-group">
+                    <label>Número / Apto:</label>
+                    <input type="text" id="numero-cliente" placeholder="Ex: 123" class="input-estilizado" required>
+                </div>
+                <div class="input-group">
+                    <label>Distância (KM):</label>
+                    <input type="number" id="distancia-km" placeholder="KM" oninput="recalcularFreteDinamico()" class="input-estilizado" required>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Totais Finais (Box de baixo) -->
+    <div class="total-box">
+        <div class="info-linha-total">
+            <span>Subtotal:</span>
+            <span>R$ <span id="subtotal-final">0,00</span></span>
+        </div>
+        <div class="info-linha-total">
+            <span>Frete:</span>
+            <span>R$ <span id="valor-frete-exibido">0,00</span></span>
+        </div>
+        <hr style="opacity: 0.3; margin: 15px 0;">
+        <h2>Total Geral: R$ <span id="total-geral-final">0,00</span></h2>
+    </div>
+
+    <button onclick="salvarEPontuar()" class="btn-whatsapp">
+        Confirmar Pedido e Enviar Orçamento ✨
+    </button>
+    
+    <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: var(--cinza-texto);">
+        Ao clicar, você será redirecionado para o WhatsApp.
+    </p>
+</main>
+
+<script src="js/script.js"></script>
+<script src="js/finalizar.js"></script>
+
+</body>
+</html>
