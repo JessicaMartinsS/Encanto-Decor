@@ -1,6 +1,8 @@
 /* Isso garante que padding e borda não aumentem o tamanho real dos elementos */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* --- SEÇÃO DE CADASTRO --- */
@@ -9,21 +11,21 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
-    /* Adicionando um degradê sutil no fundo para dar profundidade */
+    /* Certifique-se que --rosa-suave existe no seu :root */
     background: linear-gradient(135deg, var(--branco) 0%, var(--rosa-suave) 100%);
     padding: 20px;
 }
 
 .cadastro-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
-    backdrop-filter: blur(10px); /* Efeito de vidro (Glassmorphism) */
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     padding: 50px 40px;
-    border-radius: 40px; /* Bordas muito mais arredondadas e amigáveis */
-    box-shadow: 0 20px 40px rgba(112, 26, 117, 0.1); /* Sombra suave e profunda */
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(112, 26, 117, 0.1);
     max-width: 450px;
     width: 100%;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Bordas que brilham levemente */
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .cadastro-container h2 {
@@ -44,14 +46,7 @@
 .form-cadastro {
     display: flex;
     flex-direction: column;
-    gap: 25px; 
-}
-
-/* --- ESTILO DOS INPUTS (NEXT GEN) --- */
-.form-cadastro {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espaço entre os blocos */
+    gap: 20px; 
 }
 
 .input-group {
@@ -73,67 +68,46 @@
 .input-group input {
     width: 100%;
     padding: 16px 22px;
-    background-color: #f9fafb; /* Fundo levemente cinza para destacar */
+    background-color: #f9fafb;
     border: 2px solid #f1f1f1;
-    border-radius: 25px; /* Formato pílula moderno */
+    border-radius: 25px;
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
     color: var(--roxo-escuro);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Efeito quando clica no campo */
 .input-group input:focus {
     outline: none;
     background-color: #ffffff;
     border-color: var(--rosa-vibrante);
     box-shadow: 0 10px 20px rgba(236, 72, 153, 0.1);
-    transform: translateY(-2px); /* Ele dá um leve pulinho */
+    transform: translateY(-2px);
 }
 
-/* Estilo do botão para combinar */
-.btn-acessar {
-    background: linear-gradient(90deg, var(--rosa-vibrante), #ff69b4);
-    color: white;
-    padding: 18px;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.btn-acessar:hover {
-    transform: scale(1.03);
-    box-shadow: 0 12px 25px rgba(236, 72, 153, 0.4);
-    filter: brightness(1.1);
-}
-/* --- BOTÃO DE ACESSO --- */
+/* --- BOTÃO DE ACESSO (UNIFICADO) --- */
 .btn-acessar {
     background: linear-gradient(90deg, var(--rosa-vibrante), #ff69b4);
     color: var(--branco);
     padding: 18px 45px;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: 15px auto 0;
     display: block;
-    width: 100%; /* Botão largo fica mais moderno em mobile */
-    max-width: 280px;
+    width: 100%;
+    max-width: 320px;
     box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .btn-acessar:hover {
-    background: var(--roxo-escuro);
-    transform: scale(1.05); /* Efeito de pulso suave */
+    filter: brightness(1.1);
+    transform: scale(1.05);
     box-shadow: 0 15px 30px rgba(112, 26, 117, 0.4);
 }
 
@@ -141,7 +115,7 @@
     transform: scale(0.98);
 }
 
-/* Responsividade para celulares */
+/* Responsividade */
 @media (max-width: 480px) {
     .cadastro-container {
         padding: 35px 25px;
@@ -153,6 +127,6 @@
     }
 
     .btn-acessar {
-        width: 100%;
+        max-width: 100%;
     }
 }
