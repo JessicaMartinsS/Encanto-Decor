@@ -1,272 +1,227 @@
+/* ============================================================
+   1. CONFIGURAÇÕES BASE E VARIÁVEIS
+   ============================================================ */
 :root {
     --rosa-vibrante: #ec4899;
     --roxo-escuro: #701a75;
+    --rosa-suave: #fdf2f8;
     --branco: #ffffff;
     --cinza-claro: #f3f4f6;
+    --cinza-texto: #555555;
+    --fonte-principal: 'Poppins', sans-serif;
 }
 
 body { 
-    font-family: 'Poppins', sans-serif; 
+    font-family: var(--fonte-principal); 
     background: #f9fafb; 
     margin: 0; 
-    /* Adiciona um padding inferior para o conteúdo não ficar escondido atrás da barra flutuante */
-    padding-bottom: 80px; 
+    padding-bottom: 110px; /* Espaço para não cobrir o último item */
 }
 
 /* ============================================================
-   ESTILIZAÇÃO: SEÇÃO ESCOLHA DO TEMA
+   2. SEÇÃO ESCOLHA DO TEMA (MAIOR E MAIS DESTACADA)
    ============================================================ */
 .tema-interesse-box {
     background: var(--branco);
-    padding: 25px 20px;
-    border-radius: var(--borda-raio);
-    box-shadow: var(--sombra-suave);
-    margin: 20px auto;
+    padding: 35px 25px; /* Aumentado o respiro interno */
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(112, 26, 117, 0.1);
+    margin: 25px 15px;
     border: 2px solid var(--rosa-suave);
-    max-width: 600px; /* Centraliza e limita a largura em telas grandes */
+    max-width: 100%; 
 }
 
 .tema-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .tema-container label {
     font-weight: 700;
     color: var(--roxo-escuro);
-    font-size: 1.1rem;
+    font-size: 1.3rem; /* Título maior */
     text-align: center;
-}
-
-.input-wrapper {
-    width: 100%;
-    position: relative;
 }
 
 .tema-container input {
     width: 100%;
-    padding: 15px 20px;
-    border: 2px solid var(--rosa-suave);
-    border-radius: 50px; /* Formato pílula combinando com os botões */
-    font-family: var(--fonte-principal);
-    font-size: 1rem;
-    color: var(--cinza-texto);
-    background-color: var(--fundo-input);
+    padding: 20px; /* Input bem alto para facilitar o toque */
+    border: 2px solid #eee;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    color: var(--roxo-escuro);
+    background-color: #f9f9f9;
     outline: none;
-    transition: var(--transicao);
-    text-align: center; /* Digitação centralizada */
+    text-align: center;
+    transition: 0.3s;
 }
 
 .tema-container input:focus {
     border-color: var(--rosa-vibrante);
     background-color: var(--branco);
-    box-shadow: 0 0 12px rgba(236, 72, 153, 0.15);
 }
 
-/* Estilização do Placeholder (o texto de exemplo dentro do input) */
 .tema-container input::placeholder {
-    color: #a0aec0;
-    font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color: #bbb;
 }
 
 .ajuda-tema {
-    font-size: 1.0rem;
+    font-size: 1.1rem;
     color: var(--rosa-vibrante);
-    text-align: center;
     font-weight: 600;
-    margin: 0;
-    animation: pulse 2s infinite; /* Leve animação para chamar atenção */
+    animation: pulse 2s infinite;
 }
 
-/* Pequena animação de pulso no texto de ajuda */
 @keyframes pulse {
-    0% { opacity: 0.7; }
+    0% { opacity: 0.6; }
     50% { opacity: 1; }
-    100% { opacity: 0.7; }
+    100% { opacity: 0.6; }
 }
 
-/* Ajuste Mobile */
-@media (max-width: 768px) {
-    .tema-interesse-box {
-        margin: 10px;
-        padding: 20px 15px;
-    }
-    
-    .tema-container label {
-        font-size: 1rem;
-    }
-}
-
+/* ============================================================
+   3. GRID DE PRODUTOS E CARDS
+   ============================================================ */
 .catalogo-container { 
-    max-width: 100%; 
-    margin: 0 auto; 
-    padding: 10px; 
+    padding: 15px; 
 }
 
-/* Grid de Produtos: No mobile mostramos 1 card largo ou 2 pequenos se preferir */
 .grid-catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 25px;
+}
+
+.card-item {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .card-item img {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain; /* Exibe 100% da foto */
-    background-color: #ffffff;
-    padding: 15px; /* Deixa a imagem menor e mais elegante */
-    display: block;
-}
-
-.card-item img {
-    width: 100%;
-    height: 220px; /* Aumentado levemente para destacar o kit */
+    height: 250px;
     object-fit: cover;
 }
 
-.card-info { 
-    padding: 20px; 
-    text-align: center; 
-}
-
-.card-info h3 {
-    font-size: 1.1rem;
-    color: var(--roxo-escuro);
-    margin-bottom: 5px;
-}
+.card-info { padding: 20px; text-align: center; }
 
 .preco { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
+    font-size: 1.6rem; 
+    font-weight: 800; 
     color: var(--rosa-vibrante); 
-    display: block; 
-    margin: 10px 0; 
+    margin: 12px 0; 
 }
 
-/* Controles de Quantidade: Aumentados para facilitar o toque com o polegar */
+/* Controles de Quantidade (Grandes para o dedo) */
 .controles-qtd {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     background: var(--cinza-claro);
-    padding: 10px;
+    padding: 12px;
     border-radius: 50px;
-    margin-top: 15px;
 }
 
 .controles-qtd button {
     background: var(--rosa-vibrante);
     color: white;
     border: none;
-    width: 40px; /* Aumentado de 30px para 40px para melhor usabilidade mobile */
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
+    font-size: 1.5rem;
     cursor: pointer;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.qtd-numero {
-    font-weight: bold;
-    font-size: 1.1rem;
-    min-width: 30px;
 }
 
 /* ============================================================
-   WIDGET TOTAL FLUTUANTE COM LIXEIRA
+   4. WIDGET TOTAL FLUTUANTE (MAXIMIZADO PARA CELULAR)
    ============================================================ */
 .total-flutuante {
     position: fixed;
-    bottom: 0px;
-    left: 0;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 450px;
-    background: var(--roxo-escuro); /* Cor base roxa */
+    bottom: 15px;
+    left: 5%;
+    width: 90%;
+    background: var(--roxo-escuro);
     color: white;
-    padding: 12px 20px;
+    padding: 15px 20px;
     border-radius: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 9999;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    height: 85px; /* Altura fixa para dar corpo */
 }
 
 .total-info {
     display: flex;
     flex-direction: column;
-    min-width: 100px;
 }
 
 .total-info span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     opacity: 0.8;
+    letter-spacing: 1px;
 }
 
 .total-info strong {
-    font-size: 1.4rem;
+    font-size: 1.5rem; /* Valor bem grande */
     white-space: nowrap;
 }
 
-/* Container dos botões da direita */
 .acoes-flutuantes {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaço entre a lixeira e o botão */
+    gap: 12px;
 }
 
 .btn-lixeira {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    padding: 15px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    transition: 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.btn-lixeira:hover {
-    background: rgba(255, 0, 0, 0.2);
+    color: white;
+    font-size: 1.2rem;
 }
 
 .btn-ver-pedido {
-    background: var(--rosa-vibrante); /* Rosa vibrante da marca */
+    background: var(--rosa-vibrante);
     color: white;
     text-decoration: none;
-    padding: 14px24;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 0.8rem;
+    padding: 0 25px; /* Mais largura lateral */
+    height: 55px;    /* BOTÃO ALTO: Muito fácil de clicar */
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     white-space: nowrap;
-    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    text-transform: uppercase;
 }
 
-/* Ajuste para telas minúsculas */
-@media (max-width: 350px) {
-    .body {
-        padding-bottom: 90px; /* Mais espaço para o total flutuante */
-    }
+/* Ajustes para Celulares Pequenos */
+@media (max-width: 380px) {
     .total-flutuante {
         padding: 10px 15px;
+        height: 75px;
     }
-    .total-info strong {
-        font-size: 1.2rem;
+    .total-info strong { font-size: 1.2rem; }
+    .btn-ver-pedido { 
+        height: 45px; 
+        padding: 0 15px; 
+        font-size: 0.8rem; 
     }
-    .btn-ver-pedido {
-        padding: 12px 18px;
-        font-size: 1.0rem;
-    }
+    .tema-container label { font-size: 1.1rem; }
 }
