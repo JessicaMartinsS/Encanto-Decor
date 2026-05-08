@@ -1,130 +1,452 @@
+
 /* ============================================================
-   ESTILIZAÇÃO DA PÁGINA DE FINALIZAÇÃO (finalizar.css)
+
+   1. VARIÁVEIS GLOBAIS (DESIGN SYSTEM)
+
    ============================================================ */
 
-/* 1. Container Principal */
-main {
-    max-width: 600px; /* Mais estreito para foco no preenchimento */
-    margin: 0 auto;
-    padding: 20px 15px 120px;
+:root {
+    --rosa-vibrante: #ec4899;
+    --rosa-suave: #fff5f7;
+    --roxo-escuro: #701a75;
+    --cinza-texto: #4b5563;
+    --cinza-claro: #f9fafb;
+    --branco: #ffffff;
+    --fundo-input: #f8f9fa;
+    --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.05);
+    --borda-raio: 20px;
 }
 
-/* 2. Estilização dos Cards de Resumo */
-.card-resumo {
+/* ============================================================
+   2. RESET E CONFIGURAÇÕES DE BASE
+   ============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cinza-claro);
+    font-family: 'Poppins', sans-serif;
+    color: var(--cinza-texto);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ============================================================
+   3. LAYOUT DO CATÁLOGO (GRIDS)
+   ============================================================ */
+.catalogo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.titulo-secao {
+    color: var(--roxo-escuro);
+    margin: 30px 0 20px;
+    padding-left: 10px;
+    border-left: 5px solid var(--rosa-vibrante);
+    font-size: 2.5rem;
+}
+
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* ============================================================
+   4. COMPONENTES: CARDS (Padronização)
+   ============================================================ */
+
+.card-info {
+    flex-grow: 1; /* Empurra os preços e botões para o final do card, alinhando-os */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-item, .produto-card {
     background: var(--branco);
     border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px; /* Espaço extra no fundo */
+    text-align: center;
+}
+
+.card-item:hover, .produto-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Força o formato quadrado independente do tamanho da tela */
+    object-fit: contain;  /* Garante que a imagem apareça 100% sem cortes */
+    background-color: #ffffff; /* Fundo branco para preencher as sobras da imagem */
+    display: block;
+    padding: 10px; /* Opcional: um respiro para a imagem não tocar na borda do card */
+}
+
+.produto-card h3 {
+    color: var(--roxo-escuro);
+    margin-bottom: 10px;
+}
+li{
+    text-align: center;
+}
+
+.lista-itens-kit, .horario-evento {
+    text-align: center;
+    list-style: none;
+    font-size: 1rem;
+    margin: 10px 0;
+    text-align: left; /* Lista fica melhor alinhada à esquerda */
+    padding-left: 10px;
+}
+
+.preco {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--roxo-escuro);
+    margin: 15px 0;
+}
+
+/* ============================================================
+   5. CONTROLES DE QUANTIDADE E INPUTS
+   ============================================================ */
+.controles-qtd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: var(--fundo-input);
+    padding: 10px;
+    border-radius: 50px;
+    margin: 0 15px;
+}
+
+.controles-qtd button {
+    background: var(--rosa-vibrante);
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.tema-interesse-box, .ajuda-tema {
+    background: var(--rosa-vibrante);
+    color: white;
     padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-premium);
+    border-radius: var(--borda-raio);
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: none;
+    margin-top: 15px;
+    outline: none;
+}
+
+/* ============================================================
+   6. WIDGET DE TOTAL FLUTUANTE
+   ============================================================ */
+
+.total-flutuante {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 450px;
+    background: var(--roxo-escuro);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.btn-lixeira {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-ver-pedido {
+    background: var(--rosa-vibrante);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+/* finalizar.css - Estilização Premium Jess & Ster */
+
+:root {
+    --roxo-primario: #8e44ad;
+    --roxo-escuro: #6c3483;
+    --rosa-suave: #f8f1f9;
+    --cinza-texto: #555;
+    --borda-suave: #e0e0e0;
+    --branco: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Cartões de Resumo */
+.card-resumo {
+    background: var(--branco);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
     border: 1px solid var(--rosa-suave);
+    transition: transform 0.2s;
 }
 
 .card-resumo h3 {
+    font-size: 1.5rem;
     color: var(--roxo-escuro);
-    font-size: 1.2rem;
-    margin-bottom: 15px;
     border-bottom: 2px solid var(--rosa-suave);
     padding-bottom: 10px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* 3. Itens do Check-list (Onde aparecem os produtos) */
-#produtos-check-list {
-    margin-bottom: 15px;
-}
-
+/* Linhas de Informação (Cadastro e Totais) */
 .info-linha {
+    font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px dashed #eee;
-    font-size: 0.95rem;
-    color: var(--cinza-texto);
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--borda-suave);
+}
+
+.info-linha:last-child {
+    border-bottom: none;
 }
 
 .info-linha strong {
+    color: var(--roxo-primario);
+    font-weight: 500;
+}
+
+/* Corrigindo a visibilidade dos labels e inputs */
+.agendamento-header h3 {
     color: var(--roxo-escuro);
+    font-size: 2rem;
+    font-weight: 800;
 }
 
-/* 4. Caixa de Totais e Destaques */
-.total-box {
-    background: var(--roxo-escuro);
-    color: white;
-    padding: 25px;
-    border-radius: 10%;
-    text-align: center;
-    margin-top: 30px;
-}
-
-.total-box h2 {
-    font-size: 1.3rem;
-    color: var(--rosa-principal);
-    margin: 10px 0;
-}
-
-.total-box span {
-    font-size: 1.3rem;
-    opacity: 0.9;
-}
-
-/* 5. Inputs Estilizados (Data, Hora, CEP, KM) */
-.input-estilizado {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid var(--rosa-suave);
-    border-radius: 12px;
-    background: var(--fundo-input);
-    font-family: 'Poppins', sans-serif;
-    margin-top: 8px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.input-estilizado:focus {
-    border-color: var(--rosa-vibrante);
-    background: white;
+.agendamento-header p {
+    font-size: 1rem;
+    color: #666; /* Cinza escuro para leitura */
+    margin-bottom: 20px;
 }
 
 label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--roxo-escuro);
-    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--roxo-escuro) !important; /* MUDADO: De branco para roxo para aparecer no fundo branco */
     display: block;
 }
 
-/* 6. Botão de WhatsApp (Ação Principal) */
+.input-estilizado {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--rosa-suave);
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    color: #333; /* Texto que o usuário digita */
+    background-color: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Garante que o padding não estoure a largura */
+}
+
+/* Garante que o flexbox não esmague os campos */
+.campos-agendamento-flex {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.campo-detalhe {
+    flex: 1;
+    min-width: 250px; /* Evita que fiquem muito estreitos */
+}
+
+/* Box de Totais Finais */
+.total-box {
+    background: var(--roxo-escuro);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+}
+
+.info-linha-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.total-box h2 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    margin-top: 10px;
+}
+
+/* Botão WhatsApp */
 .btn-whatsapp {
     width: 100%;
-    background: #25d366;
+    background-color: #25d366;
     color: white;
     border: none;
     padding: 18px;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 25px;
     cursor: pointer;
+    margin-top: 25px;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
 }
 
-.btn-whatsapp:active {
-    transform: scale(0.98);
+.btn-whatsapp:hover {
+    background-color: #1ebe57;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
-/* 7. Agendamento Flex (Lado a lado no mobile se houver espaço) */
-.campos-agendamento-flex {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-@media (max-width: 480px) {
+/* Responsividade */
+@media (max-width: 600px) {
     .campos-agendamento-flex {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 0;
     }
+    
+    .total-box h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* ============================================================
+   8. RESPONSIVIDADE (AJUSTES PARA TELAS PEQUENAS)
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Ajuste do Header */
+    header {
+        padding: 15px 3%;
+    }
+
+    .logo video {
+        width: 100px; /* Logo um pouco menor no celular */
+    }
+
+    .header-phrase h1 {
+        font-size: 1.2rem; /* Diminui o título para não ocupar muito espaço */
+    }
+
+    /* Navegação: Links em coluna ou mais espaçados */
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 0.85rem;
+        padding: 8px;
+        background: #f3f4f6; /* Adiciona um fundo leve para parecer botão no celular */
+        border-radius: 10px;
+    }
+
+    /* Catálogo: Uma coluna por vez */
+    .grid-catalogo {
+        grid-template-columns: 1fr; /* Força os cards a ocuparem a largura toda */
+        gap: 20px;
+    }
+
+    /* Ajuste de padding no container principal */
+    .catalogo-container {
+        padding: 15px;
+    }
+
+    /* Tema Box: Ajuste de largura do input */
+    .input-wrapper input {
+        width: 95%; /* Input ocupa quase toda a largura */
+        font-size: 0.9rem;
+    }
+
+    /* Widget Total Flutuante: Ajuste para não cobrir o conteúdo */
+    .total-flutuante {
+        width: 95%;
+        bottom: 10px;
+        padding: 10px 15px;
+        max-width: none; /* Remove o limite de largura no celular */
+        font-size: 0.9rem;
+    }
+
+    .btn-ver-pedido {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .card-item img {
+        width: 100%;            /* Ocupa a largura disponível */
+        height: 250px;          /* Define a altura do "quadrado" */
+        object-fit: contain;    /* FAZ A MÁGICA: Mostra a foto inteira sem cortar */
+        background-color: #fff; /* Fundo branco caso a foto seja de outro formato */
+        padding: 5px;           /* Um respiro entre a foto e a borda */
+        display: block;
+    }
+
+/* Ajuste para telas MUITO pequenas (iPhone SE, etc) */
+
+@media (max-width: 380px) {
+    .header-phrase h1 {
+        font-size: 1rem;
+    }
+
+    .controles-qtd {
+        gap: 10px;
+    }
+}
 }

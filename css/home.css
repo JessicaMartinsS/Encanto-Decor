@@ -62,7 +62,7 @@ header, .cabecalho-principal {
 
 /* Logo e Identidade */
 .logo video {
-    height: 70px;
+    height: 85px;
     width: auto;
     border-radius: 12px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -78,7 +78,7 @@ header, .cabecalho-principal {
 .header-phrase h1 {
     color: var(--cinza-texto);
     font-weight: 600;
-    font-size: 1.0rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
@@ -89,7 +89,7 @@ nav a, .menu-navegacao a {
     color: var(--roxo-escuro);
     margin-left: 20px;
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     transition: var(--transicao);
     padding: 10px 15px;
     border-radius: var(--radius-padrao);
@@ -282,114 +282,63 @@ footer p { color: white; font-size: 1rem; }
     border-color: var(--rosa-vibrante); 
 }
 
+
 /* ==========================================================================
-   7. RESPONSIVIDADE (MOBILE-FIRST OPTIMIZATION)
+   7. RESPONSIVIDADE (MOBILE FIRST ADAPTATION)
    ========================================================================== */
 @media (max-width: 768px) {
-    /* Header: Empilhamento limpo */
-    header, .cabecalho-principal {
-        padding: 15px 10px !important;
-    }
-
-    .container-header {
+    /* Ajuste do Header */
+    header, .container-header {
         flex-direction: column !important;
-        gap: 12px !important;
+        height: auto !important;
+        padding: 15px 20px !important;
+        gap: 15px !important;
+        text-align: center;
     }
 
-    .logo video { 
-        height: 55px !important; 
-    }
-
-    /* Esconde a frase curta em celulares muito pequenos para ganhar espaço, 
-       ou reduz significativamente */
-    .header-phrase h1 { 
-        font-size: 0.7rem !important;
-        letter-spacing: 1px !important;
-        margin-bottom: 5px;
-    }
-
-    /* Navegação: Estilo 'Pills' para facilitar o polegar */
+    /* Menu em formato de botões para facilitar o toque */
     nav, .menu-navegacao {
-        width: 100%;
+        margin: 0 !important;
+        display: flex !important;
         justify-content: center !important;
-        gap: 8px !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
     }
 
     nav a, .menu-navegacao a {
         margin: 0 !important;
-        padding: 10px 14px !important; /* Aumentado para facilitar o toque */
+        padding: 8px 15px !important;
         background-color: var(--rosa-suave) !important;
-        font-size: 0.85rem !important;
-        flex: 1; /* Faz os botões dividirem o espaço igualmente */
-        max-width: 110px;
-        text-align: center;
+        border-radius: 15px !important;
+        font-size: 0.9rem !important;
     }
 
-    /* Seções de Texto */
-    .intro, .dream-invite {
-        padding: 40px 5%;
-    }
+    /* Ajustes de Logo e Títulos */
+    .logo video { height: 50px !important; }
+    .logo h1 { font-size: 1.3rem !important; }
+    .header-phrase h1 { font-size: 0.8rem !important; }
+    
+    .intro h1, .dream-invite h2 { font-size: 1.8rem; }
+    p { font-size: 1rem; }
 
-    .intro h1, .dream-invite h2 { 
-        font-size: 1.7rem; 
-        line-height: 1.2;
-    }
-
-    /* Carrossel: Ajuste Crítico para não vazar da tela */
+    /* Ajuste do Carrossel para telas pequenas */
     .carousel-container {
-        height: 350px;
-        perspective: 800px; /* Reduz a profundidade no mobile */
+        height: 400px;
     }
 
     .mySlides {
-        width: 180px; 
+        width: 200px; /* Reduz o tamanho do card no celular */
     }
 
     .mySlides img {
-        height: 260px;
+        height: 300px;
     }
 
-    /* Aproxima os cards laterais para caberem na largura do celular */
-    .mySlides.prev-card { 
-        transform: translateX(-80px) scale(0.65) rotateY(20deg); 
-        opacity: 0.4;
-    }
+    .mySlides.prev-card { transform: translateX(-120px) scale(0.7); }
+    .mySlides.next-card { transform: translateX(120px) scale(0.7); }
     
-    .mySlides.next-card { 
-        transform: translateX(80px) scale(0.65) rotateY(-20deg); 
-        opacity: 0.4;
-    }
-
-    .mySlides.active {
-        transform: scale(1.1); /* Um pouco menor para não encostar nas setas */
-    }
-
-    /* Setas do Carrossel: Maiores para o dedo */
-    .prev, .next {
-        padding: 12px;
-        font-size: 30px;
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-    }
-
-    /* Botões de Ação (CTA) */
-    .btn-ver-fotos, .cta-button, .cta-button-dream {
-        width: 90%; /* Botão quase largura total no mobile */
-        padding: 18px;
-        font-size: 1rem;
-    }
-}
-
-/* Ajuste para celulares extra pequenos (Ex: iPhone SE, Jelly) */
-@media (max-width: 380px) {
-    .mySlides {
-        width: 150px;
-    }
-    .mySlides.prev-card { transform: translateX(-60px) scale(0.6); }
-    .mySlides.next-card { transform: translateX(60px) scale(0.6); }
-    
-    nav a {
-        font-size: 0.75rem !important;
-        padding: 8px 5px !important;
+    .caption-text {
+        font-size: 14px;
+        padding: 6px 12px;
     }
 }

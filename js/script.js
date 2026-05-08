@@ -1,3 +1,4 @@
+// MANTEMOS OS IMPORTS - Eles são necessários para o Firebase funcionar!
 import { db } from './firebase-config.js'; 
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -6,100 +7,58 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/fi
    ============================================================ */
 let carrinhoItens = JSON.parse(localStorage.getItem('carrinho_v2')) || [];
 
-window.adicionarItem = function(id, nome, preco, operacao) {
-    const displayElement = document.getElementById(`qtd-display-${id}`);
-    if (!displayElement) return;
+// 1. Função para adicionar/remover itens (Vinculada ao window para o HTML enxergar)
+window.adicionarItem = function(id, nome, preco, mudanca) {
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || {};
 
-    let qtdAtual = parseInt(displayElement.innerText) || 0;
+    if (!carrinho[id]) {
+        carrinho[id] = { nome: nome, preco: preco, qtd: 0 };
+    }
 
-    if (operacao === 1) {
-        carrinhoItens.push({ id, nome, preco: parseFloat(preco) });
-        qtdAtual++;
+    carrinho[id].qtd += mudanca;
 
-        if (id === 'serv-montagem') {
-            const temEntrega = carrinhoItens.some(item => item.id === 'serv-entrega');
-            if (!temEntrega) {
-                alert("O serviço de Montagem exige obrigatoriamente a contratação da Entrega! ✨");
-                adicionarItem('serv-entrega', 'Entrega e Retirada', 30, 1);
-            }
-        }
+    if (carrinho[id].qtd <= 0) {
+        delete carrinho[id];
+        const display = document.getElementById(`qtd-display-${id}`);
+        if (display) display.innerText = 0;
     } else {
-        const index = carrinhoItens.findIndex(item => item.id === id);
-        if (index > -1) {
-            carrinhoItens.splice(index, 1);
-            qtdAtual--;
-        }
+        const display = document.getElementById(`qtd-display-${id}`);
+        if (display) display.innerText = carrinho[id].qtd;
     }
 
-    displayElement.innerText = Math.max(0, qtdAtual);
-    localStorage.setItem('carrinho_v2', JSON.stringify(carrinhoItens));
-    atualizarTotalFlutuante();
-}
+    sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+    window.atualizarTotal(); // Usando a versão global
+};
 
-function atualizarTotalFlutuante() {
-    const total = carrinhoItens.reduce((sum, item) => sum + item.preco, 0);
-    const widget = document.getElementById('total-flutuante');
-    const elementoValor = document.getElementById('valor-total-fixo');
+// 2. Função de Atualização do Total
+window.atualizarTotal = function() {
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || {};
+    let total = 0;
 
-    if (elementoValor) {
-        elementoValor.innerText = total.toFixed(2).replace('.', ',');
+    for (let item in carrinho) {
+        total += carrinho[item].preco * carrinho[item].qtd;
     }
 
-    if (widget) {
-        if (carrinhoItens.length > 0) {
-            widget.classList.add('mostrar');
-        } else {
-            widget.classList.remove('mostrar');
-        }
+    const elementoTotal = document.getElementById('valor-total');
+    if (elementoTotal) {
+        elementoTotal.innerText = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
     }
-}
+};
 
+// 3. Função para a Lixeira (Limpar Pedido)
 window.limparCarrinho = function() {
-    if (confirm("Deseja remover todos os itens do carrinho? ✨")) {
-        localStorage.removeItem('carrinho_v2');
-        carrinhoItens = [];
-        const displays = document.querySelectorAll('[id^="qtd-display-"]');
-        displays.forEach(display => display.innerText = "0");
-        atualizarTotalFlutuante();
+    if (confirm("Deseja realmente limpar seu pedido? ✨")) {
+        sessionStorage.removeItem('carrinho');
+        localStorage.removeItem('carrinho_v2'); // Limpa ambos para garantir
+        location.reload();
     }
-}
+};
 
 /* ============================================================
    SINCRONIZAÇÃO E FIREBASE
    ============================================================ */
-document.addEventListener('DOMContentLoaded', function() {
-    atualizarTotalFlutuante();
 
-    if (carrinhoItens.length > 0) {
-        const contagem = carrinhoItens.reduce((acc, item) => {
-            acc[item.id] = (acc[item.id] || 0) + 1;
-            return acc;
-        }, {});
-
-        for (let id in contagem) {
-            const display = document.getElementById(`qtd-display-${id}`);
-            if (display) display.innerText = contagem[id];
-        }
-    }
-    
-    const temaSalvo = localStorage.getItem('tema_festa');
-    const campoTema = document.getElementById('input-tema');
-    if (temaSalvo && campoTema) campoTema.value = temaSalvo;
-});
-
-window.salvarCadastroInicial = function() {
-    const nome = document.getElementById('input-nome').value;
-    if (nome.trim() !== "") {
-        localStorage.setItem('nome_cliente', nome);
-        localStorage.setItem('email_cliente', document.getElementById('input-email').value);
-        localStorage.setItem('telefone_cliente', document.getElementById('input-telefone').value);
-        window.location.href = 'catalogo.html'; 
-    } else {
-        alert("Por favor, preencha seu nome! ✨");
-    }
-}
-
-// SALVAR NO BANCO E WHATSAPP
+// SALVAR NO BANCO E WHATSAPP (Vinculada ao window para não quebrar)
 window.salvarNoBancoEIrParaWhats = async function() {
     const data = localStorage.getItem('data_evento');
     const nome = localStorage.getItem('nome_cliente');
@@ -109,30 +68,63 @@ window.salvarNoBancoEIrParaWhats = async function() {
         return;
     }
 
+    // Pegamos o total do sessionStorage que é o que você está usando agora
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || {};
+    let valorCalculado = 0;
+    for (let item in carrinho) {
+        valorCalculado += carrinho[item].preco * carrinho[item].qtd;
+    }
+
     const dadosParaOAgendamento = {
         cliente: nome,
         data: data,
         tema: localStorage.getItem('tema_festa') || 'Não definido',
         status: 'pendente',
         detalhes: localStorage.getItem('obs_evento') || '',
-        valorTotal: carrinhoItens.reduce((sum, item) => sum + item.preco, 0),
-        valorSinal: 0,
-        saldo: carrinhoItens.reduce((sum, item) => sum + item.preco, 0),
+        valorTotal: valorCalculado,
         criadoEm: new Date()
     };
 
     try {
         await addDoc(collection(db, "eventos"), dadosParaOAgendamento);
         console.log("Sucesso no banco!");
-        // Aqui você chamaria sua função original de abrir o WhatsApp
+        alert("Pedido enviado com sucesso! Abrindo WhatsApp...");
+        // Adicione aqui a sua função de abrir o WhatsApp
     } catch (e) {
         console.error("Erro Firebase:", e);
     }
-}
+};
 
+// Inicialização ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    // Sincroniza os displays com o que está salvo
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || {};
+    for (let id in carrinho) {
+        const display = document.getElementById(`qtd-display-${id}`);
+        if (display) display.innerText = carrinho[id].qtd;
+    }
+    
+    window.atualizarTotal();
+
+    // Recupera dados do tema
+    const temaSalvo = localStorage.getItem('tema_festa');
+    const campoTema = document.getElementById('input-tema');
+    if (temaSalvo && campoTema) campoTema.value = temaSalvo;
+});
+
+// Listener para salvar inputs automaticamente
 document.addEventListener('change', function(e) {
     if (e.target.id === 'data-evento') localStorage.setItem('data_evento', e.target.value);
-    if (e.target.id === 'horario-evento') localStorage.setItem('horario_evento', e.target.value);
     if (e.target.id === 'obs-evento') localStorage.setItem('obs_evento', e.target.value);
     if (e.target.id === 'input-tema') localStorage.setItem('tema_festa', e.target.value);
 });
+
+window.salvarCadastroInicial = function() {
+    const nome = document.getElementById('input-nome').value;
+    if (nome && nome.trim() !== "") {
+        localStorage.setItem('nome_cliente', nome);
+        window.location.href = 'catalogo.html'; 
+    } else {
+        alert("Por favor, preencha seu nome! ✨");
+    }
+};

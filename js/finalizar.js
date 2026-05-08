@@ -85,7 +85,7 @@ function carregarResumoCompleto() {
     <div class="info-linha">
         <div style="display: flex; flex-direction: column;">
             <span>🚚 Entrega e Retirada</span>
-            <small id="status-frete-detalhe" style="color: #888; font-size: 0.7rem;">(Aguardando CEP)</small>
+            <small id="status-frete-detalhe" style="color: #888; font-size: 1.2rem;">(Aguardando CEP)</small>
         </div>
         <span id="resumo-frete">R$ 0,00</span>
     </div>
@@ -99,10 +99,10 @@ function carregarResumoCompleto() {
         <div class="box-sinal">
             <div class="textos">
                 <strong>Sinal de Reserva (40%)</strong>
-                <small>Valor para garantir a sua data ✨</small>
+                <small><p>Valor para garantir a sua data ✨</small></p>
             </div>
             <div class="valor-destaque">
-                R$ <span id="valor-sinal-reserva">0,00</span>
+                <strong>R$ <span id="valor-sinal-reserva">0,00</span></strong>
             </div>
         </div>
     </div>

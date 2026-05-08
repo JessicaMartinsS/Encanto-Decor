@@ -27,52 +27,71 @@ body {
     width: 100%;
 }
 
-/* ============================================================
-   2. CABEÇALHO E IDENTIDADE (HEADER)
-   ============================================================ */
-header {
+/* ==========================================================================
+   2. CABEÇALHO (HEADER) E NAVEGAÇÃO
+   ========================================================================== */
+header, .cabecalho-principal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
     background-color: var(--branco);
     box-shadow: var(--sombra-leve);
+    border-bottom: 2px solid var(--rosa-suave);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.logo video {
-    height: 60px;
-    border-radius: 10px;
-}
-
-.header-phrase {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.header-phrase h1 {
-    font-size: 1rem;
-    color: var(--roxo-escuro);
-    text-transform: uppercase;
-}
-
-nav {
+.container-header {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-nav a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 700;
+/* Logo e Identidade */
+.logo video {
+    height: 85px;
+    width: auto;
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transicao);
 }
 
-nav a:hover {
+.logo h1 {
+    font-size: 1.5rem;
+    color: var(--rosa-vibrante);
+    margin: 0;
+}
+
+.header-phrase h1 {
+    color: var(--cinza-texto);
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Menu de Navegação */
+nav a, .menu-navegacao a {
+    text-decoration: none;
+    color: var(--roxo-escuro);
+    margin-left: 20px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    transition: var(--transicao);
+    padding: 10px 15px;
+    border-radius: var(--radius-padrao);
+}
+
+nav a:hover, .menu-navegacao a:hover {
+    background-color: var(--rosa-suave);
     color: var(--rosa-vibrante);
 }
+
 
 /* ============================================================
    3. GALERIA DE FOTOS (PORTFÓLIO)
