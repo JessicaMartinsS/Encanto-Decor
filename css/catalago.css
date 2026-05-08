@@ -185,14 +185,14 @@ body {
    ============================================================ */
 .total-flutuante {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
+    bottom: 0px;
+    left: 0;
     transform: translateX(-50%);
-    width: 95%;
+    width: 100%;
     max-width: 450px;
     background: var(--roxo-escuro); /* Cor base roxa */
     color: white;
-    padding: 10px 18px;
+    padding: 12px 20px;
     border-radius: 50px;
     display: flex;
     justify-content: space-between;
@@ -208,13 +208,13 @@ body {
 }
 
 .total-info span {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     opacity: 0.8;
 }
 
 .total-info strong {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     white-space: nowrap;
 }
 
@@ -228,9 +228,9 @@ body {
 .btn-lixeira {
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    padding: 8px;
+    padding: 15px;
     border-radius: 50%;
     transition: 0.3s;
     display: flex;
@@ -246,7 +246,7 @@ body {
     background: var(--rosa-vibrante); /* Rosa vibrante da marca */
     color: white;
     text-decoration: none;
-    padding: 10px 18px;
+    padding: 14px24;
     border-radius: 30px;
     font-weight: bold;
     font-size: 0.8rem;
@@ -256,14 +256,17 @@ body {
 
 /* Ajuste para telas minúsculas */
 @media (max-width: 350px) {
+    .body {
+        padding-bottom: 90px; /* Mais espaço para o total flutuante */
+    }
     .total-flutuante {
-        padding: 8px 12px;
+        padding: 10px 15px;
     }
     .total-info strong {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     .btn-ver-pedido {
-        padding: 8px 12px;
-        font-size: 0.75rem;
+        padding: 12px 18px;
+        font-size: 1.0rem;
     }
 }
