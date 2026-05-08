@@ -1,0 +1,177 @@
+/* ============================================================
+   1. VARIÁVEIS E CONFIGURAÇÕES GERAIS (GLOBAL)
+   ============================================================ */
+:root {
+    --rosa-suave: #ffe4e1;
+    --rosa-vibrante: #d81b60;
+    --rosa-hover: #c2185b;
+    --roxo-escuro: #4a148c;
+    --cinza-texto: #555;
+    --branco: #ffffff;
+    --sombra-leve: 0 4px 12px rgba(0,0,0,0.1);
+    --fonte-principal: 'Poppins', sans-serif;
+    --transicao: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: #f9f9f9;
+    color: var(--cinza-texto);
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ============================================================
+   2. CABEÇALHO E IDENTIDADE (HEADER)
+   ============================================================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: var(--branco);
+    box-shadow: var(--sombra-leve);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo video {
+    height: 60px;
+    border-radius: 10px;
+}
+
+.header-phrase {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header-phrase h1 {
+    font-size: 1rem;
+    color: var(--roxo-escuro);
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--roxo-escuro);
+    font-weight: 700;
+    transition: var(--transicao);
+}
+
+nav a:hover {
+    color: var(--rosa-vibrante);
+}
+
+/* ============================================================
+   3. GALERIA DE FOTOS (PORTFÓLIO)
+   ============================================================ */
+.galeria-fotos {
+    padding: 40px 20px;
+    text-align: center;
+    max-width: 1200px; /* Limite apenas para telas grandes */
+    margin: 0 auto;
+    width: 100%;
+}
+
+.galeria-fotos h2 {
+    margin-bottom: 30px;
+    color: var(--rosa-vibrante);
+    font-size: 2rem;
+}
+
+.grid-fotos {
+    display: grid;
+    /* auto-fit adaptativo */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.foto-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--sombra-leve);
+    aspect-ratio: 1 / 1; /* Garante que o quadro seja quadrado */
+    border: 2px solid var(--rosa-suave);
+    background-color: #ffffff; /* Fundo para conter a imagem */
+    transition: var(--transicao);
+}
+
+.foto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* MOSTRA 100% DA IMAGEM SEM CORTAR */
+    padding: 10px; /* Recuo para a imagem não tocar na borda */
+}
+
+/* ============================================================
+   4. RESPONSIVIDADE (FOCO TOTAL EM MOBILE)
+   ============================================================ */
+
+@media (max-width: 768px) {
+    /* CORREÇÃO PRINCIPAL: Faz o site ocupar a largura do celular */
+    .catalogo-container, 
+    .galeria-fotos, 
+    main {
+        width: 100%;
+        padding: 15px 10px; /* Margem pequena nas laterais */
+    }
+
+    /* Header compacto e empilhado */
+    header {
+        flex-direction: column;
+        padding: 10px 5%;
+        gap: 8px;
+    }
+
+    .logo video {
+        height: 50px;
+    }
+
+    .header-phrase h1 {
+        font-size: 0.8rem;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        background-color: var(--rosa-suave); /* Estilo botão */
+        border-radius: 20px;
+        margin: 0;
+    }
+
+    /* Grid de Fotos: 2 colunas no mobile aproveitando a largura */
+    .grid-fotos {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px;
+    }
+
+    .foto-item img {
+        padding: 5px; /* Menor padding no celular */
+    }
+}
+
+/* Ajuste extra para telas muito pequenas */
+@media (max-width: 360px) {
+    .grid-fotos {
+        grid-template-columns: 1fr; /* Uma foto por linha em telas minúsculas */
+    }
+}

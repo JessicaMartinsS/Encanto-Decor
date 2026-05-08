@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel ADM - Encanto Decor</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <link rel="stylesheet" href="css/agenda.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="header-actions">
+            <button id="btnNovoPedido" class="btn-primary">➕ Novo Evento</button>
+            <button id="btnAbrirGestao" class="btn-secondary">📋 Gerenciar Eventos</button>
+            <button id="btnSair" class="btn-outline">Sair</button>
+        </div>
+    </header>
+
+    <main class="calendar-container">
+        <div id="calendar"></div>
+    </main>
+
+    <div id="modalCadastro" class="modal" style="display:none;">
+    <div class="modal-content modal-large"> <span class="close" id="closeCadastro">&times;</span>
+        <h3 id="tituloModal">Dados do Evento</h3>
+        <form id="formCadastro">
+            <div class="form-grid"> <div class="col">
+                    <label>Informações da Cliente</label>
+                    <input type="text" id="nomeCliente" placeholder="Nome da Cliente" required>
+                    <input type="text" id="telefoneCliente" placeholder="WhatsApp (ex: 11999999999)" required>
+                    
+                    <label>Localização</label>
+                    <input type="text" id="cepCliente" placeholder="CEP (Apenas números)" maxlength="8">
+                    <input type="text" id="ruaCliente" placeholder="Rua / Logradouro">
+                    <input type="text" id="numCliente" placeholder="Número">
+                    <input type="text" id="bairroCliente" placeholder="Bairro">
+                </div>
+
+                <div class="col">
+                    <label>Deta do Evento</label>
+                    <input type="date" id="dataEvento" min="2024-01-01" max="2030-12-31" required>
+                    <input type="text" id="temaEvento" placeholder="Tema da Festa">
+                    
+                    <select id="itensPedido">
+                        <option value="pegue e monte">Pegue e Monte</option>
+                        <option value="festa na mesa">Festa na Mesa</option>
+                        <option value="outros">Outros</option>
+                    </select>
+
+                    <select id="statusPedido">
+                        <option value="pendente">Pendente</option>
+                        <option value="sinal">Sinal Pago</option>
+                        <option value="pago">Total Pago</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="valorTotal" placeholder="Total R$" step="0.01">
+                        <input type="number" id="valorSinal" placeholder="Sinal R$" step="0.01">
+                    </div>
+                    
+                    <textarea id="detalhesPedido" placeholder="Detalhes específicos do kit..."></textarea>
+                </div>
+            </div>
+            <button type="submit" id="btnSalvar" class="btn-primary" style="width: 100%; margin-top: 20px;">Salvar Pedido Completo</button>
+        </form>
+    </div>
+</div>
+
+    <div id="modalGestao" class="modal" style="display:none;">
+        <div class="modal-content modal-large">
+            <span class="close" id="closeGestao">&times;</span>
+            <h2>Lista dos Eventos</h2>
+            <div class="tabela-scroll">
+                <table class="tabela-adm">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabela"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalResumo" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeResumo">&times;</span>
+            <h3 id="resumoTitulo"></h3> <div id="resumoTexto">
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <div id="aviso-girar">
+    <div class="aviso-conteúdo">
+        <p>🔄 Para uma melhor visualização da agenda, use o celular deitado.</p>
+    </div>
+</div>
+</body>
+</html>

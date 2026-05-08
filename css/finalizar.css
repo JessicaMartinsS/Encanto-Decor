@@ -1,264 +1,130 @@
-/* --- RESET BÁSICO --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ============================================================
+   ESTILIZAÇÃO DA PÁGINA DE FINALIZAÇÃO (finalizar.css)
+   ============================================================ */
+
+/* 1. Container Principal */
+main {
+    max-width: 600px; /* Mais estreito para foco no preenchimento */
+    margin: 0 auto;
+    padding: 20px 15px 120px;
 }
 
-:root {
-    --rosa-vibrante: #ec4899;
-    --roxo-escuro: #701a75;
-    --cinza-texto: #4b5563;
-    --branco: #ffffff;
-}
-
-body {
-    background-color: #f9fafb;
-    font-family: 'Poppins', sans-serif;
-    padding: 20px;
-}
-
-/* --- CARDS --- */
-.card-resumo, .agendamento-premium {
-    max-width: 600px;
-    margin: 0 auto 20px;
+/* 2. Estilização dos Cards de Resumo */
+.card-resumo {
     background: var(--branco);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* --- CONTAINER DO RESUMO --- */
-#produtos-check-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    border-radius: var(--borda-raio);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-premium);
+    border: 1px solid var(--rosa-suave);
 }
 
 .card-resumo h3 {
+    color: var(--roxo-escuro);
     font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--rosa-suave);
+    padding-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
-/* Pequeno ajuste para a lista não ficar colada nas bordas */
+/* 3. Itens do Check-list (Onde aparecem os produtos) */
 #produtos-check-list {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-/* --- LINHAS DE INFORMAÇÃO (PRODUTOS) --- */
-/* --- ESTILIZAÇÃO DO RESUMO --- */
-
-/* Padroniza o título para bater com a imagem */
-.card-resumo h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #701a75; /* Roxo da sua marca */
-    margin-bottom: 20px;
-    border: none; /* Remove bordas se houver */
-}
-
-/* Ajuste das Linhas de Itens */
 .info-linha {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
-    border-bottom: none !important; /* REMOVE as linhas que estão sobrando */
-}
-
-/* Garante a mesma fonte e estilo para o nome do produto */
-.info-linha span:first-child {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    color: #4b5563; /* Cinza suave */
-    font-weight: 500;
-}
-
-/* Estilo do Preço (Negrito e alinhado) */
-.info-linha span:last-child {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #000; /* Preto para destaque */
-}
-
-/* Container da lista */
-.lista-produtos-interna {
-    margin-bottom: 5px;
-}
-
-/* Destaque para Montagem e Frete */
-.servico-destaque {
-    color: var(--rosa-vibrante) !important;
-    font-weight: 600 !important;
-}
-
-/* Ajuste para não ter linha no último item da lista antes do total */
-#produtos-check-list .info-linha:last-of-type {
-    border-bottom: none;
-}
-/* --- BLOCO DE TOTAL E SINAL --- */
-#bloco-total-resumo {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Linha do Total Geral */
-.total-geral-linha {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.95rem;
+    color: var(--cinza-texto);
 }
 
-.total-geral-linha span:first-child {
-    font-size: 1.1rem;
-    font-weight: 700;
+.info-linha strong {
     color: var(--roxo-escuro);
 }
 
-.total-geral-linha span:last-child {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--roxo-escuro);
+/* 4. Caixa de Totais e Destaques */
+.total-box {
+    background: var(--roxo-escuro);
+    color: white;
+    padding: 25px;
+    border-radius: 10%;
+    text-align: center;
+    margin-top: 30px;
 }
 
-/* --- BOX DO SINAL DE RESERVA --- */
-.box-sinal {
-    background: #fff5f7; /* Rosa bem clarinho */
-    border: 2px dashed var(--rosa-vibrante);
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
+.total-box h2 {
+    font-size: 1.3rem;
+    color: var(--rosa-principal);
+    margin: 10px 0;
 }
 
-.box-sinal:hover {
-    transform: scale(1.02);
+.total-box span {
+    font-size: 1.3rem;
+    opacity: 0.9;
 }
 
-.box-sinal .textos {
-    display: flex;
-    flex-direction: column;
-}
-
-.box-sinal strong {
-    color: var(--rosa-vibrante);
-    font-size: 1rem;
-}
-
-.box-sinal small {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 2px;
-}
-
-.box-sinal .valor-destaque {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--rosa-vibrante);
-}
-
-/* Tag de status do frete dentro da linha */
-#status-frete-detalhe {
-    font-size: 0.7rem;
-    font-weight: 400;
-    transition: color 0.3s ease;
-}
-
-/* --- INPUTS E FORMULÁRIO --- */
-.campos-agendamento-flex {
-    display: flex;
-    gap: 15px;
+/* 5. Inputs Estilizados (Data, Hora, CEP, KM) */
+.input-estilizado {
     width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--rosa-suave);
+    border-radius: 12px;
+    background: var(--fundo-input);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 8px;
+    outline: none;
+    transition: 0.3s;
 }
 
-.input-group, .campo-detalhe {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    flex: 1;
+.input-estilizado:focus {
+    border-color: var(--rosa-vibrante);
+    background: white;
 }
 
 label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--rosa-vibrante);
-    margin-bottom: 5px;
-}
-
-.input-estilizado {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #f8f9fa;
-    border-radius: 15px;
-    background-color: #f8f9fa;
-    font-size: 1rem;
-    outline: none;
-}
-
-/* --- TOTAL BOX --- */
-.total-box {
-    max-width: 600px;
-    margin: 20px auto;
-    background: var(--roxo-escuro);
-    color: white;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-}
-
-/* --- BOTÃO --- */
-.btn-whatsapp {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--roxo-escuro);
+    margin-top: 10px;
     display: block;
+}
+
+/* 6. Botão de WhatsApp (Ação Principal) */
+.btn-whatsapp {
     width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #25d366;
+    background: #25d366;
     color: white;
+    border: none;
     padding: 18px;
     border-radius: 50px;
-    border: none;
-    font-weight: bold;
     font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 25px;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s;
 }
 
-
-/* Remove a borda da última linha antes do traço separador */
-#produtos-check-list > .info-linha:last-of-type {
-    border-bottom: none;
-}
-.total-box h2 {
-    font-size: 1.8rem;
-    margin-top: 10px;
+.btn-whatsapp:active {
+    transform: scale(0.98);
 }
 
-/* Garante que o container do frete não quebre */
-.frete-label-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* 7. Agendamento Flex (Lado a lado no mobile se houver espaço) */
+.campos-agendamento-flex {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
-
-/* Ajuste de inputs para não estourarem o card */
-.input-estilizado {
-    box-sizing: border-box; /* Essencial */
-}
-
 
 @media (max-width: 480px) {
     .campos-agendamento-flex {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 }

@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Pedido - Jess & Ster</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css"> <!-- Adicionei o global aqui por segurança -->
-    <link rel="stylesheet" href="css/cadastro.css">
-    <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/home.css"> <!-- Adicionei o global aqui por segurança -->
+    <link rel="stylesheet" href="css/catalago.css">
     <link rel="stylesheet" href="css/finalizar.css">
+    <link rel="icon" href="data:,">
 </head> <!-- Fechamento da head que faltava -->
 <body>
+<script>
+(function verificarAcesso() {
+    const acessoLiberado = sessionStorage.getItem('cliente_logado');
 
+    if (!acessoLiberado) {
+        // Se ela fechou a aba, o sessionStorage morreu. Mandamos para o login.
+        alert("Sua sessão expirou. Por favor, confirme seus dados! ✨");
+        window.location.href = "cadastro.html";
+    }
+})();
+</script>
 <header>
+
     <div class="logo">
         <video autoplay loop muted playsinline>
             <source src="img/logo.video.mp4" type="video/mp4">
@@ -25,14 +37,13 @@
 
     <nav>
         <a href="index.html">Início</a>
-        <a href="foto.html">Galeria</a>
+        <a href="galeria.html">Galeria</a>
         <a href="cadastro.html">Catálogo</a>
         <a href="finalizar.html">Meus Pedidos</a>
     </nav>
 </header>
 
 <main class="catalogo-container">
-
     <!-- SEÇÃO: ESCOLHA DO TEMA -->
     <section class="tema-interesse-box">
         <div class="tema-container">
@@ -43,11 +54,12 @@
             <p class="ajuda-tema">Digite o tema para personalizar seu orçamento!</p>
         </div>
     </section>
-    
+  
     <!-- SEÇÃO: PEGUE E MONTE -->
     <section class="categoria-catalogo">
         <h2 class="titulo-secao">Pegue e Monte!</h2>
         <div class="grid-catalogo">
+
             <!-- Magia do Encanto -->
             <div class="card-item">
                 <img src="./img/17.png" alt="Magia do Encanto">
@@ -61,9 +73,13 @@
                     </ul>
                     <span class="preco">R$ 120,00</span>
                     <div class="controles-qtd">
+
                         <button onclick="adicionarItem('pm-magia-monte', 'PM Magia do Encanto', 120, -1)">-</button>
+
                         <span id="qtd-display-pm-magia-monte">0</span>
+
                         <button onclick="adicionarItem('pm-magia-monte', 'PM Magia do Encanto', 120, 1)">+</button>
+
                     </div>
                 </div>
             </div>
@@ -82,9 +98,13 @@
                     </ul>
                     <span class="preco">R$ 150,00</span>
                     <div class="controles-qtd">
+
                         <button onclick="adicionarItem('pm-tok-monte', 'PM Tok do Encanto', 150, -1)">-</button>
+
                         <span id="qtd-display-pm-tok-monte">0</span>
+
                         <button onclick="adicionarItem('pm-tok-monte', 'PM Tok do Encanto', 150, 1)">+</button>
+
                     </div>
                 </div>
             </div>
@@ -113,33 +133,355 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tok do Encanto (Mesa) -->
+            <div class="card-item">
+                <img src="./img/15.png" alt="Tok do Encanto">
+                <div class="card-info">
+                    <h3>Tok do Encanto</h3>
+                    <ul class="lista-itens-kit">
+                        <li>✨ Painel 50x50</li>
+                        <li>✨ Mini Arco de Balão</li>
+                        <li>✨ Bandejinhas para doces</li>
+                        <li>✨ Vaso de Flores</li>
+                    </ul>
+                    <span class="preco">R$ 55,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('pm-tok-mesa', 'Mesa Tok do Encanto', 40, -1)">-</button>
+                        <span id="qtd-display-pm-tok-mesa">0</span>
+                        <button onclick="adicionarItem('pm-tok-mesa', 'Mesa Tok do Encanto', 40, 1)">+</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+
 
     <!-- SEÇÃO: ITENS ADICIONAIS -->
     <section class="categoria-catalogo">
         <h2 class="titulo-secao">Itens Adicionais</h2>
         <div class="grid-catalogo">
-            <!-- Fio Fada (Corrigido o erro de fechamento de div) -->
+           <div class="card-item">
+                <div class="card-info">
+                    <h3>Painel Redondo 150x150</h3>
+                    <span class="preco">R$ 65,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('painel-redondo', 'painel Redondo 150x150', 65, -1)">-</button>
+                        <span id="qtd-display-painel-redondo">0</span>
+                        <button onclick="adicionarItem('painel-redondo', 'painel Redondo 150x150', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
             <div class="card-item">
                 <div class="card-info">
-                    <h3>Fio Fada</h3>
-                    <span class="preco">R$ 15,00</span>
+                    <h3>Painel Romano 2x1</h3>
+                    <span class="preco">R$ 65,00</span>
                     <div class="controles-qtd">
-                        <button onclick="adicionarItem('led-fada', 'Fio Fada', 15, -1)">-</button>
-                        <span id="qtd-display-led-fada">0</span>
-                        <button onclick="adicionarItem('led-fada', 'Fio Fada', 15, 1)">+</button>
+                        <button onclick="adicionarItem('painel-romano', 'painel Romano 2x1', 65, -1)">-</button>
+                        <span id="qtd-display-painel-romano">0</span>
+                        <button onclick="adicionarItem('painel-romano', 'painel Romano 2x1', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Trio de Cilindros</h3>
+                    <span class="preco">R$ 45,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('trio-cilindros', 'Trio de Cilindros', 65, -1)">-</button>
+                        <span id="qtd-display-trio-cilindros">0</span>
+                        <button onclick="adicionarItem('trio-cilindros', 'Trio de Cilindros', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Trio de Cilindros Aberto com Balão</h3>
+                    <span class="preco">R$ 55,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('trio-cilindros', 'Trio de Cilindros', 65, -1)">-</button>
+                        <span id="qtd-display-trio-cilindros">0</span>
+                        <button onclick="adicionarItem('trio-cilindros', 'Trio de Cilindros', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Mesa Fake</h3>
+                    <span class="preco">R$ 25,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('mesa-fake', 'Mesa Fake', 65, -1)">-</button>
+                        <span id="qtd-display-mesa-fake">0</span>
+                        <button onclick="adicionarItem('mesa-fake', 'Mesa Fake', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Cômoda Fake</h3>
+                    <span class="preco">R$ 30,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('comoda-fake', 'Cômoda Fake', 65, -1)">-</button>
+                        <span id="qtd-display-comoda-fake">0</span>
+                        <button onclick="adicionarItem('comoda-fake', 'Cômoda Fake', 65, 1)">+</button>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Arco de Balão desconstruido (2m)</h3>
+                    <p>a partir de:</p> 
+                    <span class="preco">R$ 80,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('arco-balao', 'Arco de Balão desconstruido (2m)', 45, -1)">-</button>
+                        <span id="qtd-display-arco-balao">0</span>
+                        <button onclick="adicionarItem('arco-balao', 'Arco de Balão desconstruido (2m)', 45, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Bolo Fake</h3>
+                    <p>a partir de:</p> 
+                    <span class="preco">R$ 30,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('bolo-fake', 'Bolo Fake', 80, -1)">-</button>
+                        <span id="qtd-display-bolo-fake">0</span>
+                        <button onclick="adicionarItem('bolo-fake', 'Bolo Fake', 80, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Topper de Bolo</h3>
+                    <p>a partir de:</p> 
+                    <span class="preco">R$ 20,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('topper-bolo', 'Topper de Bolo', 30, -1)">-</button>
+                        <span id="qtd-display-topper-bolo">0</span>
+                        <button onclick="adicionarItem('topper-fake', 'Topper Fake', 80, 1)">+</button>
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Centro de Mesa</h3>
+                    <p>a partir de:</p>
+                    <span class="preco">R$ 10,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('centro-mesa', 'Centro de Mesa', 10, -1)">-</button>
+                        <span id="qtd-display-centro-mesa">0</span>
+                        <button onclick="adicionarItem('centro-mesa', 'Centro de Mesa', 10, 1)">+</button>
                     </div>
                 </div>
             </div>
-            <!-- Adicione os outros itens aqui seguindo o mesmo padrão -->
+
+            <div class="card-item">
+                <div class="card-info">
+                    <h3>Toalha de Mesa + Cobre Mancha</h3>
+                    <p>Toalha Branca</p>
+                    <p>Cobre mancha (escolher a cor)</p>
+                    <p>Unidade</p>
+                    <span class="preco">R$ 12,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('toalha-mesa', 'Toalha de Mesa + Cobre Mancha', 10, -1)">-</button>
+                        <span id="qtd-display-toalha-mesa">0</span>
+                        <button onclick="adicionarItem('toalha-mesa', 'Toalha de Mesa + Cobre Mancha', 10, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+             <div class="card-item">
+                <div class="card-info">
+                    <h3>Toalha de Mesa + Cobre Mancha</h3>
+                    <p>Toalha Branca</p>
+                    <p>Cobre mancha (escolher a cor)</p>
+                    <p>5 unidades</p>
+                    <span class="preco">R$ 50,00</span>
+                    <div class="controles-qtd">
+                        <button onclick="adicionarItem('toalha-mesa', 'Toalha de Mesa + Cobre Mancha', 10, -1)">-</button>
+                        <span id="qtd-display-toalha-mesa">0</span>
+                        <button onclick="adicionarItem('toalha-mesa', 'Toalha de Mesa + Cobre Mancha', 10, 1)">+</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+        <!-- Iluminação -->
+<!-- SERVIÇOS ADICIONAIS -->
+    <section class="catalogo-produtos">
+        <h2 class="titulo-secao">Iluminação Led</h2>
+        <div class="grid-catalogo">
+            <div class="produto-card">
+                <h3>Mangueira de Led</h3>
+                <span class="preco">R$ 20,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('mangueira-led', 'Mangueira de Led', 30, -1)">-</button>
+                    <span id="qtd-display-mangueira-led">0</span>
+                    <button onclick="adicionarItem('mangueira-led', 'Mangueira de Led', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Cortina Led</h3>
+                <span class="preco">R$ 20,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('cortina-led', 'Cortina Led', 30, -1)">-</button>
+                    <span id="qtd-display-cortina-led">0</span>
+                    <button onclick="adicionarItem('cortina-led', 'Cortina Led', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Fio Fada</h3>
+                <span class="preco">R$ 15,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('fio-fada', 'Fio Fada', 15, -1)">-</button>
+                    <span id="qtd-display-fio-fada">0</span>
+                    <button onclick="adicionarItem('fio-fada', 'Fio Fada', 15, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Um Numero Led</h3>
+                <span class="preco">R$ 30,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('um-numero-led', 'Um Numero Led', 30, -1)">-</button>
+                    <span id="qtd-display-um-numero-led">0</span>
+                    <button onclick="adicionarItem('um-numero-led', 'Um Numero Led', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Dois Numeros Led</h3>
+                <span class="preco">R$ 50,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('dois-numeros-led', 'Dois Numeros Led', 25, -1)">-</button>
+                    <span id="qtd-display-dois-numeros-led">0</span>
+                    <button onclick="adicionarItem('dois-numeros-led', 'Dois Numeros Led', 25, 1)">+</button>
+                </div>
+            </div>
+       </div>
+    </section>
+
+    <!-- SERVIÇOS ADICIONAIS -->
+    <section class="catalogo-produtos">
+        <h2 class="titulo-secao">Caixas Para Presentes</h2>
+        <div class="grid-catalogo">
+            <div class="produto-card">
+                <h3>Caixa Lisa</h3>
+                <span class="preco">R$ 30,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-lisa', 'Caixa Lisa', 30, -1)">-</button>
+                    <span id="qtd-display-caixa-lisa">0</span>
+                    <button onclick="adicionarItem('caixa-lisa', 'Caixa Lisa', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Caixa com tema</h3>
+                <span class="preco">R$ 40,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-com-tema', 'Caixa com tema', 30, -1)">-</button>
+                    <span id="qtd-display-caixa-com-tema">0</span>
+                    <button onclick="adicionarItem('caixa-com-tema', 'Caixa com tema', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Caixa Balão</h3>
+                <p>Caixa em formato de um balão</p>
+                <span class="preco">R$ 80,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-com-balao', 'Caixa como Balão', 30, -1)">-</button>
+                    <span id="qtd-display-caixa-com-balao">0</span>
+                    <button onclick="adicionarItem('caixa-com-balao', 'Caixa como Balão', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Caixa Baby</h3>
+                <span class="preco">R$ 25,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-baby', 'Caixa Baby', 25, -1)">-</button>
+                    <span id="qtd-display-caixa-baby">0</span>
+                    <button onclick="adicionarItem('caixa-baby', 'Caixa Baby', 25, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Caixa Baby Vazado</h3>
+                <span class="preco">R$ 25,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-baby-vazado', 'Caixa Baby Vazado', 25, -1)">-</button>
+                    <span id="qtd-display-caixa-baby-vazado">0</span>
+                    <button onclick="adicionarItem('caixa-baby-vazado', 'Caixa Baby Vazado', 25, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <h3>Caixa Baby Vazado com Balão</h3>
+                <span class="preco">R$ 35,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('caixa-baby-vazado-com-balao', 'Caixa Baby Vazado com Balão', 25, -1)">-</button>
+                    <span id="qtd-display-caixa-baby-vazado-com-balao">0</span>
+                    <button onclick="adicionarItem('caixa-baby-vazado-com-balao', 'Caixa Baby Vazado com Balão', 25, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- SERVIÇOS Digitaais -->
+   <section class="catalogo-produtos">
+    <h2 class="titulo-secao">Serviços Digital</h2>
+    <div class="grid-catalogo"> <div class="produto-card">
+            <h3>Convite Digital</h3>
+            <p>Levamos e buscamos o kit para você.</p>
+            <span class="preco">R$ 10,00</span>
+            <div class="controles-qtd">
+                <button onclick="adicionarItem('serv-convite-digital', 'Convite Digital', 8, -1)">-</button>
+                <span id="qtd-display-serv-convite-digital">0</span>
+                <button onclick="adicionarItem('serv-convite-digital', 'Convite Digital', 8, 1)">+</button>
+            </div>
+        </div>
+
+        <div class="produto-card">
+            <h3>Convite Digital Animado</h3>
+            <p>Levamos e buscamos o kit para você.</p>
+            <span class="preco">R$ 15,00</span>
+            <div class="controles-qtd">
+                <button onclick="adicionarItem('serv-convite-digital-animado', 'Convite Digital Animado', 10, -1)">-</button>
+                <span id="qtd-display-serv-convite-digital-animado">0</span>
+                <button onclick="adicionarItem('serv-convite-digital-animado', 'Convite Digital Animado', 10, 1)">+</button>
+            </div>
+        </div>
+    </div> 
+</section>
 
     <!-- SERVIÇOS ADICIONAIS -->
     <section class="catalogo-produtos">
         <h2 class="titulo-secao">Serviços Adicionais</h2>
         <div class="grid-catalogo">
+
+            <div class="produto-card">
+                <h3>Retirada (Grátis)</h3>
+                <p>Você retira o kit gratuitamente.</p>
+                <span class="preco">R$ 0,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('retirada', 'Retirada', 0, -1)">-</button>
+                    <span id="qtd-display-retirada">0</span>
+                    <button onclick="adicionarItem('retirada', 'Retirada', 0, 1)">+</button>
+                </div>
+            </div>
+
             <div class="produto-card">
                 <h3>Entrega e Retirada (Frete)</h3>
                 <p>Levamos e buscamos o kit para você.</p>
@@ -150,22 +492,40 @@
                     <button onclick="adicionarItem('serv-entrega', 'Entrega e Retirada', 30, 1)">+</button>
                 </div>
             </div>
+
+            <div class="produto-card">
+                <h3>Montage e Desmontagem</h3>
+                <p>Montamos e desmontamos o kit para você.</p>
+                <span class="preco">R$ 60,00</span>
+                <div class="controles-qtd">
+                    <button onclick="adicionarItem('serv-montagem', 'Montage e Desmontagem', 0, -1)">-</button>
+                    <span id="qtd-display-serv-montagem">0</span>
+                    <button onclick="adicionarItem('serv-montagem', 'Montage e Desmontagem', 60, 1)">+</button>
+                </div>
+            </div>
+
+
         </div>
     </section>
 
-    <!-- Widget de Total Flutuante -->
     <div id="total-flutuante" class="total-flutuante">
-        <div class="info-total">
-            <span>Total: R$ <span id="valor-total-fixo">0,00</span></span>
-        </div>
-        <div class="acoes-flutuantes">
-            <button onclick="limparCarrinho()" class="btn-lixeira" title="Limpar Pedido">🗑️</button>
-            <a href="finalizar.html" class="btn-ver-pedido">Ver Pedido ➔</a>
-        </div>
+    <div class="total-info">
+        <span>Total do Pedido</span>
+        <strong id="valor-total">R$ 0,00</strong>
     </div>
-
+    
+    <div class="acoes-flutuantes">
+        <button onclick="limparCarrinho()" class="btn-lixeira" title="Limpar Pedido">
+            🗑️
+        </button>
+        <a href="finalizar.html" class="btn-ver-pedido">
+            VER PEDIDO ➔
+        </a>
+    </div>
+</div>
 </main>
 
-<script src="js/script.js"></script>
+<script type="module" src="js/script.js"></script>
 </body>
+
 </html>

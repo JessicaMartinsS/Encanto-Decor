@@ -1,0 +1,106 @@
+/* ============================================================
+   TELA DE LOGIN - ESTILIZAÇÃO PREMIUM
+   ============================================================ */
+
+.login-body {
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Mudado de height para min-height para evitar quebra em telas curtas */
+    margin: 0;
+    padding: 20px; /* Respiro para o login não colar nas bordas do celular */
+    font-family: 'Poppins', sans-serif; /* Padronizado com o restante do seu site */
+}
+
+.login-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px; /* Arredondamento seguindo sua identidade visual */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-box h2 {
+    color: #701a75; /* Roxo da sua marca */
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px; /* Aumentado para melhor toque */
+    border: 1px solid #ddd;
+    border-radius: 12px; /* Bordas mais suaves */
+    box-sizing: border-box;
+    font-size: 16px; /* CRÍTICO: Evita zoom automático no iOS */
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ff69b4; /* Rosa da sua marca ao focar */
+    outline: none;
+}
+
+#btnLogin {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff69b4; /* Cor da sua marca */
+    color: white;
+    border: none;
+    border-radius: 50px; /* Botão estilo pílula como nos outros CTAs */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+
+#btnLogin:hover {
+    background-color: #ec4899;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+}
+
+.error-msg {
+    color: #d81b60;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* ============================================================
+   RESPONSIVIDADE EXTRA PARA LOGIN
+   ============================================================ */
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .login-box h2 {
+        font-size: 1.5rem;
+    }
+
+    #btnLogin {
+        padding: 12px;
+    }
+}

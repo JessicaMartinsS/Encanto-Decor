@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jess & Ster - Encanto Decor</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/cadastro.css">
-    <link rel="stylesheet" href="css/catalogo.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+
 </head>
 <body>
 
-<header>
+    <header>
     <div class="logo">
         <video autoplay loop muted playsinline>
             <source src="img/logo.video.mp4" type="video/mp4">
@@ -26,10 +27,12 @@
     <!-- No index.html -->
     <nav>
         <a href="index.html">Início</a>
-        <a href="foto.html">Galeria</a>
+        <a href="galeria.html">Galeria</a>
         <a href="cadastro.html">Catálogo</a> <!-- Antes era catalogo.html -->
     </nav>
+
 </header>
+
 <main class="cadastro-section">
     <div class="cadastro-container">
         <h2>Quase lá! ✨</h2>
@@ -38,7 +41,7 @@
         <!-- Formulário unificado -->
         <div class="form-cadastro">
             <div class="input-group">
-                <label>🎈 Nome Completo</label>
+                <label>🎈 Nome e Sobrenome</label>
                 <input type="text" id="input-nome" placeholder="Como podemos te chamar?" required>
             </div>
 
@@ -59,6 +62,8 @@
     </div> <!-- Fechamento da cadastro-container (CORRIGIDO) -->
 </main> <!-- Fechamento da main (CORRIGIDO) -->
 
+
+
 <footer>
     <p>&copy; 2026 Jess & Ster Encanto Decor - Itaquaquecetuba, SP</p>
     <p class="dev-credit">Desenvolvido por Jessica Silva</p>
@@ -66,6 +71,7 @@
 
 <!-- Script de ponte entre Páginas -->
 <script>
+
     function salvarCadastroInicial() {
         const nome = document.getElementById('input-nome').value;
         const email = document.getElementById('input-email').value;
@@ -83,7 +89,54 @@
         alert(`Seja bem-vinda, ${nome}! Vamos ver nossos kits?`);
         window.location.href = "catalogo.html";
     }
+
+</script>
+
+<script>
+    window.addEventListener('load', () => {
+    const logadoNestaSessao = sessionStorage.getItem('cliente_logado');
+    const nomeSalvo = localStorage.getItem('nome_cliente');
+
+    // REGRA 1: Se ela já se identificou nesta aba, pula direto para o catálogo
+    if (logadoNestaSessao === 'true') {
+        window.location.href = "catalogo.html";
+        return;
+    }
+
+    // REGRA 2: Se ela fechou o site e voltou, os campos preenchem sozinhos (Login Automático)
+    if (nomeSalvo) {
+        document.getElementById('input-nome').value = nomeSalvo;
+        document.getElementById('input-email').value = localStorage.getItem('email_cliente') || '';
+        document.getElementById('input-telefone').value = localStorage.getItem('telefone_cliente') || '';
+        
+        // Opcional: Mostrar uma mensagem de "Bem-vinda de volta"
+        console.log("Dados carregados. Clique em entrar.");
+    }
+});
+
+function salvarCadastroInicial() {
+    const nome = document.getElementById('input-nome').value;
+    const email = document.getElementById('input-email').value;
+    const telefone = document.getElementById('input-telefone').value;
+
+    if (nome.trim() === "" || telefone.trim() === "") {
+        alert("Por favor, preencha os campos para continuar! ✨");
+        return;
+    }
+
+    // Salva permanentemente (para não ter que digitar tudo de novo no futuro)
+    localStorage.setItem('nome_cliente', nome);
+    localStorage.setItem('email_cliente', email);
+    localStorage.setItem('telefone_cliente', telefone);
+
+    // Salva apenas para esta aba (se fechar, isso aqui some)
+    sessionStorage.setItem('cliente_logado', 'true');
+
+    window.location.href = "catalogo.html";
+}
 </script>
 <script src="js/script.js"></script>
+<!-- Final do seu cadastro.html -->
+
 </body>
 </html>

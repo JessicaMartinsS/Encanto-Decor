@@ -1,0 +1,269 @@
+:root {
+    --rosa-vibrante: #ec4899;
+    --roxo-escuro: #701a75;
+    --branco: #ffffff;
+    --cinza-claro: #f3f4f6;
+}
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: #f9fafb; 
+    margin: 0; 
+    /* Adiciona um padding inferior para o conteúdo não ficar escondido atrás da barra flutuante */
+    padding-bottom: 80px; 
+}
+
+/* ============================================================
+   ESTILIZAÇÃO: SEÇÃO ESCOLHA DO TEMA
+   ============================================================ */
+.tema-interesse-box {
+    background: var(--branco);
+    padding: 25px 20px;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    margin: 20px auto;
+    border: 2px solid var(--rosa-suave);
+    max-width: 600px; /* Centraliza e limita a largura em telas grandes */
+}
+
+.tema-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.tema-container label {
+    font-weight: 700;
+    color: var(--roxo-escuro);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.input-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.tema-container input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid var(--rosa-suave);
+    border-radius: 50px; /* Formato pílula combinando com os botões */
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    color: var(--cinza-texto);
+    background-color: var(--fundo-input);
+    outline: none;
+    transition: var(--transicao);
+    text-align: center; /* Digitação centralizada */
+}
+
+.tema-container input:focus {
+    border-color: var(--rosa-vibrante);
+    background-color: var(--branco);
+    box-shadow: 0 0 12px rgba(236, 72, 153, 0.15);
+}
+
+/* Estilização do Placeholder (o texto de exemplo dentro do input) */
+.tema-container input::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.ajuda-tema {
+    font-size: 0.85rem;
+    color: var(--rosa-vibrante);
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+    animation: pulse 2s infinite; /* Leve animação para chamar atenção */
+}
+
+/* Pequena animação de pulso no texto de ajuda */
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+/* Ajuste Mobile */
+@media (max-width: 768px) {
+    .tema-interesse-box {
+        margin: 10px;
+        padding: 20px 15px;
+    }
+    
+    .tema-container label {
+        font-size: 1rem;
+    }
+}
+
+.catalogo-container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 15px; 
+}
+
+/* Grid de Produtos: No mobile mostramos 1 card largo ou 2 pequenos se preferir */
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain; /* Exibe 100% da foto */
+    background-color: #ffffff;
+    padding: 15px; /* Deixa a imagem menor e mais elegante */
+    display: block;
+}
+
+.card-item img {
+    width: 100%;
+    height: 220px; /* Aumentado levemente para destacar o kit */
+    object-fit: cover;
+}
+
+.card-info { 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.card-info h3 {
+    font-size: 1.1rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 5px;
+}
+
+.preco { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    color: var(--rosa-vibrante); 
+    display: block; 
+    margin: 10px 0; 
+}
+
+/* Controles de Quantidade: Aumentados para facilitar o toque com o polegar */
+.controles-qtd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: var(--cinza-claro);
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+.controles-qtd button {
+    background: var(--rosa-vibrante);
+    color: white;
+    border: none;
+    width: 40px; /* Aumentado de 30px para 40px para melhor usabilidade mobile */
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.qtd-numero {
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 30px;
+}
+
+/* ============================================================
+   WIDGET TOTAL FLUTUANTE COM LIXEIRA
+   ============================================================ */
+.total-flutuante {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 450px;
+    background: var(--roxo-escuro); /* Cor base roxa */
+    color: white;
+    padding: 10px 18px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.total-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+
+.total-info span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.total-info strong {
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+/* Container dos botões da direita */
+.acoes-flutuantes {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a lixeira e o botão */
+}
+
+.btn-lixeira {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-lixeira:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.btn-ver-pedido {
+    background: var(--rosa-vibrante); /* Rosa vibrante da marca */
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+}
+
+/* Ajuste para telas minúsculas */
+@media (max-width: 350px) {
+    .total-flutuante {
+        padding: 8px 12px;
+    }
+    .total-info strong {
+        font-size: 1rem;
+    }
+    .btn-ver-pedido {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+}

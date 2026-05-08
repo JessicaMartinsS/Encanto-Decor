@@ -1,59 +1,12 @@
-/* ============================================================
-   CARROSSEL ESTILO CARDS 3D - JESS & STER
-   ============================================================ */
-let slideIndex = 0;
-
-function updateCarousel() {
-    const slides = document.getElementsByClassName("mySlides");
-    if (slides.length === 0) return;
-
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active", "prev-card", "next-card");
-        slides[i].style.opacity = "0"; 
-        slides[i].style.display = "block";
-    }
-
-    const current = slideIndex;
-    const prev = (slideIndex === 0) ? slides.length - 1 : slideIndex - 1;
-    const next = (slideIndex === slides.length - 1) ? 0 : slideIndex + 1;
-
-    slides[current].classList.add("active");
-    slides[current].style.opacity = "1";
-
-    slides[prev].classList.add("prev-card");
-    slides[prev].style.opacity = "0.6";
-
-    slides[next].classList.add("next-card");
-    slides[next].style.opacity = "0.6";
-}
-
-function plusSlides(n) {
-    const slides = document.getElementsByClassName("mySlides");
-    if (slides.length === 0) return;
-
-    slideIndex += n;
-    if (slideIndex >= slides.length) slideIndex = 0;
-    if (slideIndex < 0) slideIndex = slides.length - 1;
-
-    updateCarousel();
-}
-
-window.addEventListener('load', () => {
-    const slides = document.getElementsByClassName("mySlides");
-    if (slides.length > 0) {
-        updateCarousel();
-        setInterval(() => {
-            plusSlides(1);
-        }, 4000);
-    }
-});
+import { db } from './firebase-config.js'; 
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 /* ============================================================
    ESTADO GLOBAL E CARRINHO - JESS & STER ENCANTO DECOR
    ============================================================ */
 let carrinhoItens = JSON.parse(localStorage.getItem('carrinho_v2')) || [];
 
-function adicionarItem(id, nome, preco, operacao) {
+window.adicionarItem = function(id, nome, preco, operacao) {
     const displayElement = document.getElementById(`qtd-display-${id}`);
     if (!displayElement) return;
 
@@ -63,7 +16,6 @@ function adicionarItem(id, nome, preco, operacao) {
         carrinhoItens.push({ id, nome, preco: parseFloat(preco) });
         qtdAtual++;
 
-        // REGRA DE OBRIGATORIEDADE: Montagem exige Entrega
         if (id === 'serv-montagem') {
             const temEntrega = carrinhoItens.some(item => item.id === 'serv-entrega');
             if (!temEntrega) {
@@ -106,24 +58,14 @@ window.limparCarrinho = function() {
     if (confirm("Deseja remover todos os itens do carrinho? ✨")) {
         localStorage.removeItem('carrinho_v2');
         carrinhoItens = [];
-        
         const displays = document.querySelectorAll('[id^="qtd-display-"]');
         displays.forEach(display => display.innerText = "0");
-        
         atualizarTotalFlutuante();
-        alert("Carrinho zerado!");
-    }
-}
-
-window.salvarTema = function() {
-    const campoTema = document.getElementById('input-tema');
-    if (campoTema) {
-        localStorage.setItem('tema_festa', campoTema.value);
     }
 }
 
 /* ============================================================
-   SINCRONIZAÇÃO E CADASTRO
+   SINCRONIZAÇÃO E FIREBASE
    ============================================================ */
 document.addEventListener('DOMContentLoaded', function() {
     atualizarTotalFlutuante();
@@ -136,63 +78,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let id in contagem) {
             const display = document.getElementById(`qtd-display-${id}`);
-            if (display) {
-                display.innerText = contagem[id];
-            }
+            if (display) display.innerText = contagem[id];
         }
     }
     
     const temaSalvo = localStorage.getItem('tema_festa');
     const campoTema = document.getElementById('input-tema');
-    if (temaSalvo && campoTema) {
-        campoTema.value = temaSalvo;
-    }
+    if (temaSalvo && campoTema) campoTema.value = temaSalvo;
 });
 
-function salvarCadastroInicial() {
+window.salvarCadastroInicial = function() {
     const nome = document.getElementById('input-nome').value;
-    const email = document.getElementById('input-email').value;
-    const telefone = document.getElementById('input-telefone').value;
-
     if (nome.trim() !== "") {
         localStorage.setItem('nome_cliente', nome);
-        localStorage.setItem('email_cliente', email);
-        localStorage.setItem('telefone_cliente', telefone);
+        localStorage.setItem('email_cliente', document.getElementById('input-email').value);
+        localStorage.setItem('telefone_cliente', document.getElementById('input-telefone').value);
         window.location.href = 'catalogo.html'; 
     } else {
-        alert("Por favor, preencha seu nome para continuar! ✨");
+        alert("Por favor, preencha seu nome! ✨");
     }
 }
 
-// Adicione estas linhas na sua função de capturar dados ou salvarCadastroInicial
-window.salvarDetalhesEvento = function() {
-    const data = document.getElementById('data-evento').value;
-    const horario = document.getElementById('horario-evento').value;
-    const obs = document.getElementById('obs-evento').value;
-
-    localStorage.setItem('data_evento', data);
-    localStorage.setItem('horario_evento', horario);
-    localStorage.setItem('obs_evento', obs);
-}
-
-// Na sua função de enviar para o WhatsApp, lembre-se de puxar esses valores:
-function gerarMensagemWhatsapp() {
+// SALVAR NO BANCO E WHATSAPP
+window.salvarNoBancoEIrParaWhats = async function() {
     const data = localStorage.getItem('data_evento');
-    const horario = localStorage.getItem('horario_evento');
-    const obs = localStorage.getItem('obs_evento');
-    const tema = localStorage.getItem('tema_festa'); // Do seu código atual
+    const nome = localStorage.getItem('nome_cliente');
 
-    let mensagem = `*Novo Pedido - Jess & Ster* \n`;
-    mensagem += `*Tema:* ${tema} \n`;
-    mensagem += `*Data:* ${data} \n`;
-    mensagem += `*Horário:* ${horario} \n`;
-    mensagem += `*Observações:* ${obs} \n`;
-    
-    // ... restante da lógica do carrinho ...
+    if (!data || !nome) {
+        alert("Erro: Dados do cliente ou data não encontrados!");
+        return;
+    }
+
+    const dadosParaOAgendamento = {
+        cliente: nome,
+        data: data,
+        tema: localStorage.getItem('tema_festa') || 'Não definido',
+        status: 'pendente',
+        detalhes: localStorage.getItem('obs_evento') || '',
+        valorTotal: carrinhoItens.reduce((sum, item) => sum + item.preco, 0),
+        valorSinal: 0,
+        saldo: carrinhoItens.reduce((sum, item) => sum + item.preco, 0),
+        criadoEm: new Date()
+    };
+
+    try {
+        await addDoc(collection(db, "eventos"), dadosParaOAgendamento);
+        console.log("Sucesso no banco!");
+        // Aqui você chamaria sua função original de abrir o WhatsApp
+    } catch (e) {
+        console.error("Erro Firebase:", e);
+    }
 }
 
 document.addEventListener('change', function(e) {
     if (e.target.id === 'data-evento') localStorage.setItem('data_evento', e.target.value);
     if (e.target.id === 'horario-evento') localStorage.setItem('horario_evento', e.target.value);
     if (e.target.id === 'obs-evento') localStorage.setItem('obs_evento', e.target.value);
+    if (e.target.id === 'input-tema') localStorage.setItem('tema_festa', e.target.value);
 });

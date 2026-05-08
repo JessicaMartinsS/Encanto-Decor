@@ -1,3 +1,6 @@
+import { db } from "./firebase-config.js"; 
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
 /* ============================================================
    1. VARIÁVEIS GERAIS
    ============================================================ */
@@ -17,10 +20,14 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function carregarDadosCliente() {
+    // Busca o telefone e já remove o sinal de "=" caso ele exista
+    const telefoneBruto = localStorage.getItem('telefone_cliente') || "---";
+    const telefoneLimpo = telefoneBruto.replace('=', ''); 
+
     const cliente = {
         nome: localStorage.getItem('nome_cliente') || "---",
         email: localStorage.getItem('email_cliente') || "---",
-        tel: localStorage.getItem('telefone_cliente') || "---",
+        tel: telefoneLimpo,
         tema: localStorage.getItem('tema_festa') || "---"
     };
 
@@ -31,7 +38,7 @@ function carregarDadosCliente() {
 }
 
 /* ============================================================
-   3. CONSTRUÇÃO DA LISTA DE RESUMO (CORRIGIDO)
+   3. CONSTRUÇÃO DA LISTA DE RESUMO
    ============================================================ */
 function carregarResumoCompleto() {
     const dadosCarrinho = localStorage.getItem('carrinho_v2');
@@ -44,23 +51,21 @@ function carregarResumoCompleto() {
     valorMontagemFixo = 0;
     let htmlProdutos = "";
 
-    // Agrupar itens para evitar repetição
     const agrupado = itensBrutos.reduce((acc, item) => {
         if (!acc[item.nome]) acc[item.nome] = { preco: parseFloat(item.preco), qtd: 0 };
         acc[item.nome].qtd++;
         return acc;
     }, {});
 
-    // 1. Processar Produtos e identificar Montagem
     for (let nome in agrupado) {
         const item = agrupado[nome];
         const precoTotalLinha = item.preco * item.qtd;
 
-        if (nome.toLowerCase().includes("montagem")) {
+        if (nome.toLowerCase().includes("mon")) {
             valorMontagemFixo += precoTotalLinha;
         } 
         else if (nome.toLowerCase().includes("entrega") || nome.toLowerCase().includes("retirada")) {
-            // Ignorado conforme solicitado
+            // Ignorado
         } 
         else {
             totalProdutosReal += precoTotalLinha;
@@ -72,7 +77,6 @@ function carregarResumoCompleto() {
         }
     }
 
-    // 2. Definir Bloco de Serviços e Totais (Classes batendo com seu CSS)
     let htmlServicos = `
     <div class="info-linha servico-destaque">
         <span>✨ Serviço de Montagem</span>
@@ -104,17 +108,14 @@ function carregarResumoCompleto() {
     </div>
 `;
 
-    // Inserir tudo no container único
     containerItens.innerHTML = htmlProdutos + `<hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">` + htmlServicos;
-    
-    // Disparar cálculos financeiros
     atualizarFinanceiro();
 }
 
 /* ============================================================
    4. CÁLCULOS DE FRETE (CEP)
    ============================================================ */
-async function buscarCEP() {
+window.buscarCEP = async function buscarCEP() {
     const cepInput = document.getElementById('cep-cliente').value.replace(/\D/g, '');
     const blocoEndereco = document.getElementById('sessao-endereco-completa');
     
@@ -156,82 +157,109 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
     return (R * c) * 1.2; 
 }
 
-function recalcularFreteDinamico() {
+window.recalcularFreteDinamico = function() {
     const km = parseFloat(document.getElementById('distancia-km').value) || 0;
     const baseFrete = 30.00;
     const limiteBase = 2.5;
+    const valorPorKmExtra = 3.00;
     
     if (km > 0) {
         if (km <= limiteBase) { 
             valorFreteFinal = baseFrete; 
         } else {
-            const blocosExtras = Math.ceil((km - limiteBase) / 2);
-            valorFreteFinal = baseFrete + (blocosExtras * 6.00);
+            const kmAdicional = km - limiteBase;
+            valorFreteFinal = baseFrete + (kmAdicional * valorPorKmExtra);
         }
         document.getElementById('status-frete-detalhe').innerText = "(Calculado conforme distância)";
         document.getElementById('status-frete-detalhe').style.color = "green";
+    } else {
+        valorFreteFinal = 0;
+        document.getElementById('status-frete-detalhe').innerText = "(Informe a quilometragem)";
+        document.getElementById('status-frete-detalhe').style.color = "red";
     }
-
     atualizarFinanceiro();
 }
 
 /* ============================================================
-   5. ATUALIZAÇÃO DO TOTAL (SINCRONIZADO)
+   5. ATUALIZAÇÃO DO TOTAL
    ============================================================ */
 function atualizarFinanceiro() {
     const subtotal = totalProdutosReal + valorMontagemFixo;
     const totalGeral = subtotal + valorFreteFinal;
     const valorSinal = totalGeral * 0.40;
 
-    // Atualiza o Frete na linha do resumo
     const elResumoFrete = document.getElementById('resumo-frete');
     if(elResumoFrete) elResumoFrete.innerText = `R$ ${valorFreteFinal.toFixed(2).replace('.', ',')}`;
 
-    // Atualiza o Total Geral no Resumo e na Caixa Roxa (se existir)
     const camposTotal = ['resumo-total-geral', 'total-geral-final'];
     camposTotal.forEach(id => {
         const el = document.getElementById(id);
         if(el) el.innerText = totalGeral.toFixed(2).replace('.', ',');
     });
 
-    // Atualiza o Valor do Sinal (Box Rosa)
     const elSinal = document.getElementById('valor-sinal-reserva');
     if(elSinal) elSinal.innerText = valorSinal.toFixed(2).replace('.', ',');
 
-    // Opcional: Atualiza o campo de frete escondido se necessário para o WhatsApp
     const elFreteExibido = document.getElementById('valor-frete-exibido');
     if(elFreteExibido) elFreteExibido.innerText = valorFreteFinal.toFixed(2).replace('.', ',');
-}
+};
 
 /* ============================================================
-   6. ENVIO WHATSAPP
+   6. ENVIO WHATSAPP + SALVAR NO CALENDÁRIO
    ============================================================ */
-async function salvarEPontuar() {
+window.salvarEPontuar = async function salvarEPontuar() {
     const btn = document.querySelector('.btn-whatsapp');
-    
+    btn.innerHTML = "Processando... ✨";
+
     const data = document.getElementById('data-evento').value;
     const hora = document.getElementById('horario-evento').value;
-    const cep = document.getElementById('cep-cliente').value;
-    const total = document.getElementById('total-geral-final').innerText;
+    const totalTexto = document.getElementById('resumo-total-geral').innerText;
+    
+    // Pequeno ajuste na conversão para garantir que o Firebase aceite o número
+    const totalNumerico = parseFloat(totalTexto.replace('.', '').replace(',', '.'));
 
-    if (!data || !hora || !cep || total === "0,00") {
-        alert("⚠️ Por favor, preencha a Data e o CEP para calcular o total.");
-        return;
+    try {
+        const novoPedido = {
+            cliente: document.getElementById('exibir-nome-cliente').innerText,
+            data: data, 
+            tema: document.getElementById('exibir-tema-festa').innerText,
+            status: 'pendente',
+            valorTotal: totalNumerico,
+            valorSinal: totalNumerico * 0.40,
+            saldo: totalNumerico * 0.60,
+            detalhes: `Horário: ${hora} | Itens: ${document.getElementById('produtos-check-list').innerText}`,
+            criadoEm: new Date()
+        };
+
+        // Salva no banco de dados
+        await addDoc(collection(db, "eventos"), novoPedido);
+        console.log("Pedido salvo com sucesso!");
+
+        // Monta o texto do WhatsApp
+        const textoZap = `*Novo Orçamento - Jess & Ster* ✨\n\n` +
+                         `*Cliente:* ${document.getElementById('exibir-nome-cliente').innerText}\n` +
+                         `*Telefone:* ${document.getElementById('exibir-telefone-cliente').innerText}\n` +
+                         `*Tema:* ${document.getElementById('exibir-tema-festa').innerText}\n` +
+                         `*Evento:* ${data} às ${hora}\n\n` +
+                         `*Endereço:* ${document.getElementById('rua-cliente').value}, ${document.getElementById('numero-cliente').value}\n` +
+                         `*Itens do Pedido:*\n${document.getElementById('produtos-check-list').innerText}\n\n` +
+                         `*Total Geral:* R$ ${totalTexto}\n\n` +
+                         `_Por favor, confirme a disponibilidade da data._`;
+
+        const linkZap = `https://api.whatsapp.com/send?phone=5511940776821&text=${encodeURIComponent(textoZap)}`;
+        
+        // Abre o WhatsApp
+        window.open(linkZap, '_blank');
+        
+        // EXIBE O MODAL (Aqui estava o problema se o script desse erro antes)
+        if(document.getElementById('modal-sucesso')) {
+            document.getElementById('modal-sucesso').style.display = 'flex';
+        }
+
+    } catch (error) {
+        console.error("Erro ao salvar no Firebase:", error);
+        alert("Erro ao processar pedido. Verifique a conexão.");
+    } finally {
+        btn.innerHTML = "Confirmar Pedido ✨";
     }
-
-    btn.innerHTML = "Enviando... ✨";
-    
-    const textoZap = `*Novo Orçamento - Jess & Ster* ✨\n\n` +
-                     `*Cliente:* ${document.getElementById('exibir-nome-cliente').innerText}\n` +
-                     `*Tema:* ${document.getElementById('exibir-tema-festa').innerText}\n` +
-                     `*Evento:* ${data} às ${hora}\n\n` +
-                     `*Endereço:* ${document.getElementById('rua-cliente').value}, ${document.getElementById('numero-cliente').value}\n` +
-                     `*Total Geral:* R$ ${total}\n\n` +
-                     `_Por favor, confirme a disponibilidade da data._`;
-
-    const linkZap = `https://api.whatsapp.com/send?phone=5511940776821&text=${encodeURIComponent(textoZap)}`;
-    
-    window.open(linkZap, '_blank');
-    document.getElementById('modal-sucesso').style.display = 'flex';
-    btn.innerHTML = "Confirmar Pedido ✨";
-}
+};

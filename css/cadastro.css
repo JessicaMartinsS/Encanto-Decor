@@ -1,24 +1,36 @@
-/* Isso garante que padding e borda não aumentem o tamanho real dos elementos */
+
+/* ============================================================
+   1. RESET E CONFIGURAÇÕES DE BASE
+   ============================================================ */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
-/* --- SEÇÃO DE CADASTRO --- */
+/*
+   Dica: Certifique-se que o arquivo global.css com o :root
+   (variáveis de cores) esteja carregado antes deste.
+*/
+
+/* ============================================================
+   2. ESTRUTURA DA PÁGINA DE CADASTRO
+   ============================================================ */
 .cadastro-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; 
-    /* Certifique-se que --rosa-suave existe no seu :root */
+    min-height: 100vh;
+    /* Gradiente suave que une a identidade visual da Jess & Ster */
     background: linear-gradient(135deg, var(--branco) 0%, var(--rosa-suave) 100%);
     padding: 20px;
+
 }
 
 .cadastro-container {
     background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Efeito de vidro moderno */
     padding: 50px 40px;
     border-radius: 40px;
     box-shadow: 0 20px 40px rgba(112, 26, 117, 0.1);
@@ -26,8 +38,10 @@
     width: 100%;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.5);
+
 }
 
+/* Títulos e textos de apoio */
 .cadastro-container h2 {
     color: var(--roxo-escuro);
     font-size: 2.2rem;
@@ -42,11 +56,13 @@
     line-height: 1.5;
 }
 
-/* --- ESTILO DO FORMULÁRIO --- */
+/* ============================================================
+   3. FORMULÁRIO E INPUTS (ENTRADA DE DADOS)
+   ============================================================ */
 .form-cadastro {
     display: flex;
     flex-direction: column;
-    gap: 20px; 
+    gap: 20px;
 }
 
 .input-group {
@@ -55,6 +71,7 @@
     text-align: left;
 }
 
+/* Labels estilizadas com o rosa da marca */
 .input-group label {
     font-size: 0.75rem;
     font-weight: 700;
@@ -65,6 +82,7 @@
     letter-spacing: 1.5px;
 }
 
+/* Campos de digitação */
 .input-group input {
     width: 100%;
     padding: 16px 22px;
@@ -77,6 +95,7 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Efeito ao clicar no campo (Foco) */
 .input-group input:focus {
     outline: none;
     background-color: #ffffff;
@@ -85,7 +104,9 @@
     transform: translateY(-2px);
 }
 
-/* --- BOTÃO DE ACESSO (UNIFICADO) --- */
+/* ============================================================
+   4. BOTÃO DE AÇÃO (CTA)
+   ============================================================ */
 .btn-acessar {
     background: linear-gradient(90deg, var(--rosa-vibrante), #ff69b4);
     color: var(--branco);
@@ -105,6 +126,7 @@
     letter-spacing: 1px;
 }
 
+/* Efeitos de Hover e Clique */
 .btn-acessar:hover {
     filter: brightness(1.1);
     transform: scale(1.05);
@@ -115,18 +137,55 @@
     transform: scale(0.98);
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
-    .cadastro-container {
-        padding: 35px 25px;
-        border-radius: 30px;
+/* ============================================================
+   5. RESPONSIVIDADE TOTAL (FOCO 99% MOBILE)
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .cadastro-section {
+        padding: 15px;
+        /* Removemos o centralizar vertical total para evitar que o teclado 
+           cubra o campo de senha ao abrir */
+        align-items: flex-start; 
+        padding-top: 50px;
     }
-    
+
+    .cadastro-container {
+        padding: 30px 20px;
+        border-radius: 30px;
+        /* No celular, o efeito de vidro pode pesar, garantimos a leitura */
+        background-color: rgba(255, 255, 255, 0.95); 
+    }
+
     .cadastro-container h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+    }
+
+    /* Aumentamos a área de toque para os dedos */
+    .input-group input {
+        padding: 14px 18px;
+        font-size: 16px !important; /* CRUCIAL: Impede zoom automático no iPhone */
     }
 
     .btn-acessar {
+        width: 100%;
         max-width: 100%;
+        padding: 16px;
+        font-size: 1rem;
+        /* Removemos o efeito de subida (translateY) no mobile 
+           para evitar bugs de renderização em navegadores de apps (como o do Insta/Whats) */
+        transform: none !important; 
+    }
+}
+
+/* Ajuste para celulares muito pequenos (iPhone SE, etc) */
+@media (max-width: 360px) {
+    .cadastro-container h2 {
+        font-size: 1.4rem;
+    }
+    
+    .cadastro-container p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
     }
 }
