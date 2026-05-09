@@ -44,7 +44,7 @@
 /* Títulos e textos de apoio */
 .cadastro-container h2 {
     color: var(--roxo-escuro);
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
     letter-spacing: -1px;
 }
@@ -73,7 +73,7 @@
 
 /* Labels estilizadas com o rosa da marca */
 .input-group label {
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--rosa-vibrante);
     margin-left: 15px;
@@ -89,7 +89,7 @@
     background-color: #f9fafb;
     border: 2px solid #f1f1f1;
     border-radius: 25px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: 'Poppins', sans-serif;
     color: var(--roxo-escuro);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -113,7 +113,7 @@
     padding: 18px 45px;
     border: none;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -158,13 +158,13 @@
     }
 
     .cadastro-container h2 {
-        font-size: 1.6rem;
+        font-size: 1rem;
     }
 
     /* Aumentamos a área de toque para os dedos */
     .input-group input {
         padding: 14px 18px;
-        font-size: 16px !important; /* CRUCIAL: Impede zoom automático no iPhone */
+        font-size: 1rem !important; /* CRUCIAL: Impede zoom automático no iPhone */
     }
 
     .btn-acessar {
@@ -175,17 +175,5 @@
         /* Removemos o efeito de subida (translateY) no mobile 
            para evitar bugs de renderização em navegadores de apps (como o do Insta/Whats) */
         transform: none !important; 
-    }
-}
-
-/* Ajuste para celulares muito pequenos (iPhone SE, etc) */
-@media (max-width: 360px) {
-    .cadastro-container h2 {
-        font-size: 1.4rem;
-    }
-    
-    .cadastro-container p {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
     }
 }

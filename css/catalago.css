@@ -1,144 +1,173 @@
-/* --- Identidade Visual Jess & Ster --- */
+/* ============================================================
+   1. DESIGN SYSTEM (UNIFICADO)
+   ============================================================ */
 :root {
     --rosa-vibrante: #ec4899;
+    --rosa-suave: #fff5f7;
+    --rosa-fundo: #fffafa;
+    --roxo-primario: #8e44ad;
     --roxo-escuro: #701a75;
-    --rosa-fundo: #fffafa; /* Um branco levemente rosado para suavidade */
+    --cinza-texto: #4b5563;
+    --cinza-claro: #f9fafb;
     --branco: #ffffff;
+    --fundo-input: #f8f9fa;
+    --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.05);
     --sombra-premium: 0 10px 30px rgba(112, 26, 117, 0.1);
+    --borda-raio: 20px;
+    --transicao: all 0.3s ease;
+}
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: var(--rosa-fundo);
-    margin: 0;
-    padding-bottom: 120px; /* Espaço para o botão flutuante não cobrir o conteúdo */
+    font-family: 'Poppins', sans-serif;
+    color: var(--cinza-texto);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-bottom: 120px; /* Espaço para o widget flutuante */
 }
 
+/* ============================================================
+   3. LAYOUT E COMPONENTES DE CATÁLOGO
+   ============================================================ */
 .catalogo-container {
-    max-width: 1400px; /* Ocupa bem a tela larga */
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* 1. SEÇÃO DO TEMA (Destaque Total no Início) */
-.tema-interest-box {
-    width: 100%;
-    margin-bottom: 50px;
-}
-
-.tema-container {
-    background: var(--branco);
-    padding: 40px 20px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: var(--sombra-premium);
-    border: 2px solid var(--rosa-vibrante);
-}
-
-.tema-container label {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--roxo-escuro);
-    margin-bottom: 20px;
-    display: block;
-}
-
-#input-tema {
-    width: 90%;
-    max-width: 700px;
-    padding: 18px 30px;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    font-size: 1.5rem;
-    outline: none;
-    transition: 0.3s;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.ajuda-tema {
-    margin-top: 15px;
-    font-size: 1.5rem;
-    color: #666;
-}
-
-#input-tema:focus {
-    border-color: var(--roxo-escuro);
-    box-shadow: 0 0 15px rgba(112, 26, 117, 0.2);
-}
-
-/* 2. KITS PRINCIPAIS (Pegue e Monte / Festa na Mesa) */
 .titulo-secao {
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: var(--roxo-escuro);
     text-align: center;
-    margin: 50px 0 30px;
+    margin: 40px 0 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border-left: 5px solid var(--rosa-vibrante); /* Mantendo o detalhe visual */
+    padding-left: 15px;
 }
 
 .grid-catalogo {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Cards grandes */
-    gap: 40px;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
 }
 
-.card-item {
+/* Cards de Produto */
+.card-item, .produto-card {
     background: var(--branco);
-    border-radius: 20px;
+    border-radius: var(--borda-raio);
     overflow: hidden;
-    box-shadow: var(--sombra-premium);
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicao);
+    display: flex;
+    flex-direction: column;
     text-align: center;
     border: 1px solid rgba(0,0,0,0.05);
 }
 
+.card-item:hover, .produto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-premium);
+}
+
 .card-item img {
     width: 100%;
-    height: auto; /* Garante que a foto apareça 100% sem cortes */
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background-color: #ffffff;
     display: block;
-    border-bottom: 3px solid var(--rosa-fundo);
+    padding: 10px;
 }
 
 .card-info {
-    padding: 30px;
+    padding: 20px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza tudo dentro do card */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.card-info h3 {
-    font-size: 1.5rem;
+/* Tipografia Interna */
+.card-info h3, .produto-card h3 {
     color: var(--roxo-escuro);
-    margin-bottom: 15px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 .lista-itens-kit {
     list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-    color: #666;
-}
-
-.lista-itens-kit li {
-    margin-bottom: 8px;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .preco {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--rosa-vibrante);
-    margin-bottom: 20px;
+    margin: 10px 0;
+    display: block;
 }
 
-/* Centralização dos Botões */
+/* ============================================================
+   4. SEÇÃO DE TEMA E INPUTS
+   ============================================================ */
+.tema-container {
+    background: var(--branco);
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: var(--sombra-premium);
+    border: 2px solid var(--rosa-vibrante);
+    margin-bottom: 40px;
+}
+
+.tema-container label, label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--roxo-escuro) !important;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#input-tema, .input-estilizado {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px 25px;
+    border: 2px solid var(--rosa-suave);
+    border-radius: 50px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: var(--transicao);
+    background-color: var(--branco);
+}
+
+#input-tema:focus, .input-estilizado:focus {
+    border-color: var(--roxo-escuro);
+    box-shadow: 0 0 10px rgba(112, 26, 117, 0.1);
+}
+
+/* Controles de Quantidade */
 .controles-qtd {
     display: flex;
     align-items: center;
-    gap: 20px;
-    background: #f8f8f8;
-    padding: 10px 25px;
+    justify-content: center;
+    gap: 15px;
+    background: var(--fundo-input);
+    padding: 8px 20px;
     border-radius: 50px;
+    margin: 10px auto;
 }
 
 .controles-qtd button {
@@ -149,131 +178,101 @@ body {
     height: 35px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1.2rem;
     font-weight: bold;
-}
-
-/* 3. DEMAIS SESSÕES (Cores nos Títulos) */
-.categoria-catalogo:nth-of-type(odd) .titulo-secao { color: var(--rosa-vibrante); }
-.categoria-catalogo:nth-of-type(even) .titulo-secao { color: var(--roxo-escuro); }
-
-.produto-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Alinha tudo (H3, Preço, Botões) ao centro horizontalmente */
-    text-align: center;
-    padding: 20px;
-    background: var(--branco);
-    border-radius: 15px;
-    box-shadow: var(--sombra-leve);
+    font-size: 1.2rem;
     transition: var(--transicao);
 }
 
-.produto-card h3 {
-    margin-bottom: 10px;
-    color: var(--roxo-escuro);
+/* ============================================================
+   5. PÁGINA DE FINALIZAÇÃO (RESUMO)
+   ============================================================ */
+main.finalizar-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.produto-card .preco {
-    display: block;
+.card-resumo {
+    background: var(--branco);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--sombra-suave);
+    border: 1px solid var(--rosa-suave);
+}
+
+.info-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--rosa-suave);
+}
+
+.total-box {
+    background: var(--roxo-escuro);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-whatsapp {
+    width: 100%;
+    background-color: #25d366;
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 50px;
+    font-size: 1.3rem;
     font-weight: 700;
-    font-size: 1.4rem;
-    color: var(--rosa-vibrante);
-    margin-bottom: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: var(--transicao);
+    display: block;
+    text-decoration: none;
 }
 
-/* 4. SERVIÇOS ADICIONAIS (Destaque) */
-.categoria-catalogo:last-of-type .produto-card {
-    border: 2px dashed var(--roxo-escuro);
-    background: #fdf4ff;
-}
-
-/* --- BARRA FLUTUANTE DE FINALIZAÇÃO --- */
+/* ============================================================
+   6. WIDGET TOTAL FLUTUANTE (BARRA INFERIOR)
+   ============================================================ */
 .total-flutuante {
     position: fixed;
-    bottom: 30px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    
-    /* Largura de 50% no Desktop */
-    width: 50%;
-    min-width: 320px;
-    
+    width: 90%;
+    max-width: 500px;
     background: var(--roxo-escuro);
-    padding: 20px 40px;
+    padding: 15px 30px;
     border-radius: 60px;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    box-shadow: 0 15px 45px rgba(112, 26, 117, 0.4);
-    z-index: 9999;
-    border: 3px solid var(--rosa-vibrante);
-}
-
-/* Informações do Valor (Letras Maiores) */
-.total-info {
-    color: #ffffff;
-    text-align: left;
-}
-
-.total-info span {
-    display: block;
-    font-size: 0.9rem; /* Aumentado */
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 300;
-    margin-bottom: 2px;
-}
-
-.total-info strong {
-    font-size: 2rem; /* Valor bem grande e visível */
-    font-weight: 700;
-}
-
-/* --- BARRA FLUTUANTE ATUALIZADA (Com Lixeira Discreta) --- */
-.total-flutuante {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    width: 50%;
-    min-width: 320px;
-    
-    background: var(--roxo-escuro);
-    padding: 15px 35px;
-    border-radius: 60px;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
     box-shadow: 0 15px 45px rgba(112, 26, 117, 0.4);
     z-index: 9999;
     border: 2px solid var(--rosa-vibrante);
 }
-
-.total-info {
-    color: #ffffff;
+.total {
+    color: var(--branco);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-
 .total-info strong {
-    font-size: 1.8rem;
+    color: white;
+    font-size: 1.2rem;
     display: block;
 }
 
-/* Área de botões alinhada */
 .acoes-flutuantes {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* A LIXEIRA: Agora pequena e limpa */
 .btn-lixeira {
-    background: rgba(255, 255, 255, 0.1); /* Fundo sutil */
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     width: 40px;
@@ -283,80 +282,40 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.1rem; /* Tamanho discreto */
-    transition: 0.3s;
+    transition: var(--transicao);
 }
 
-.btn-lixeira:hover {
-    background: #ff4d4d; /* Fica vermelha só quando passa o mouse */
-    border-color: #ff4d4d;
-}
+.btn-lixeira:hover { background: #ff4d4d; }
 
-/* Botão Principal */
 .btn-ver-pedido {
     background: var(--rosa-vibrante);
-    color: #ffffff !important;
-    padding: 12px 35px;
+    color: white !important;
+    padding: 10px 25px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.3rem;
     text-transform: uppercase;
-    transition: 0.3s;
+    font-size: 0.9rem;
 }
 
-.btn-ver-pedido:hover {
-    transform: scale(1.05);
-}
-
-/* --- Responsividade Mobile --- */
-@media (max-width: 768px) {
-    .total-flutuante {
-        width: 95%;
-        padding: 12px 20px;
-    }
-
-    .total-info strong {
-        font-size: 1.4rem;
-    }
-
-    .btn-lixeira {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-}
-
-/* 6. EXPANSIVIDADE (Celular) */
+/* ============================================================
+   7. RESPONSIVIDADE
+   ============================================================ */
 @media (max-width: 768px) {
     .grid-catalogo {
-        grid-template-columns: 1fr; /* Um por linha no celular para manter o tamanho */
-        gap: 20px;
+        grid-template-columns: 1fr;
     }
 
-    .tema-container {
-        padding: 25px 15px;
-    }
-
-    .tema-container label {
-        font-size: 1.2rem;
-    }
-
-    #input-tema {
-        padding: 12px 20px;
-    }
+    .titulo-secao { font-size: 1.2rem; }
 
     .total-flutuante {
         width: 95%;
-        padding: 12px 20px;
-        bottom: 15px;
+        padding: 10px 20px;
+        bottom: 10px;
     }
 
-    .card-info h3 {
-        font-size: 1.2rem;
-    }
-
-    .preco {
-        font-size: 1.4rem;
+    .btn-ver-pedido {
+        padding: 8px 15px;
+        font-size: 0.8rem;
     }
 }

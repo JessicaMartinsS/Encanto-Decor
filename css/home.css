@@ -30,7 +30,7 @@ body {
 p {
     font-family: var(--fonte-principal);
     color: var(--cinza-texto);
-    font-size: 1.2rem; 
+    font-size: 1.rem; 
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -70,7 +70,7 @@ header, .cabecalho-principal {
 }
 
 .logo h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--rosa-vibrante);
     margin: 0;
 }
@@ -78,7 +78,7 @@ header, .cabecalho-principal {
 .header-phrase h1 {
     color: var(--cinza-texto);
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
@@ -89,7 +89,7 @@ nav a, .menu-navegacao a {
     color: var(--roxo-escuro);
     margin-left: 20px;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     transition: var(--transicao);
     padding: 10px 15px;
     border-radius: var(--radius-padrao);
@@ -116,7 +116,7 @@ nav a:hover, .menu-navegacao a:hover {
 
 .intro h1, .dream-invite h2 {
     color: var(--roxo-escuro);
-    font-size: 2.5rem;
+    font-size: 2.0rem;
 }
 
 .intro p, .dream-invite p {
@@ -179,7 +179,7 @@ nav a:hover, .menu-navegacao a:hover {
 /* Legendas das Fotos */
 .caption-text {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 1.2rem;
     padding: 10px 20px;
     position: absolute;
     bottom: 20px;
@@ -203,7 +203,7 @@ nav a:hover, .menu-navegacao a:hover {
     padding: 16px;
     color: var(--rosa-vibrante);
     font-weight: bold;
-    font-size: 25px;
+    font-size: 1rem;
     text-decoration: none;
     transition: var(--transicao);
 }
@@ -315,10 +315,10 @@ footer p { color: white; font-size: 1rem; }
 
     /* Ajustes de Logo e Títulos */
     .logo video { height: 50px !important; }
-    .logo h1 { font-size: 1.3rem !important; }
+    .logo h1 { font-size: 0.95rem !important; }
     .header-phrase h1 { font-size: 0.8rem !important; }
     
-    .intro h1, .dream-invite h2 { font-size: 1.8rem; }
+    .intro h1, .dream-invite h2 { font-size: 1.0rem; }
     p { font-size: 1rem; }
 
     /* Ajuste do Carrossel para telas pequenas */
@@ -338,7 +338,7 @@ footer p { color: white; font-size: 1rem; }
     .mySlides.next-card { transform: translateX(120px) scale(0.7); }
     
     .caption-text {
-        font-size: 14px;
+        font-size: 1.0rem;
         padding: 6px 12px;
     }
 }
